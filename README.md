@@ -127,6 +127,6 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 Asier Medina
-Frontend Developer Student
+Full Stack Student
 Bilbao, Basque Country
 
