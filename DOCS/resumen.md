@@ -1,0 +1,1 @@
+//aqui ira el resumen para la memoria
