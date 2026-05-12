@@ -3,10 +3,6 @@
    Importa siempre después de variables.css
    ===================================================== */
 
-/* Google Fonts — cargar en el <head> del HTML:
-   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-*/
-
 /* ========================================
    RESET
    ======================================== */
@@ -237,7 +233,7 @@ button { font: inherit; cursor: pointer; }
   gap: 1rem;
 }
 
-.imgLogo { max-width: 150px; }
+.imgLogo { max-width: 80px; }
 
 .logo { text-decoration: none; }
 .logo:hover { color: var(--color-accent); }

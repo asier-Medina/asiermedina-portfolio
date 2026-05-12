@@ -15,7 +15,7 @@ export default function ContactPage() {
         <div className="contact-container">
           <div className="contact-info-section">
             <h3>Contacto</h3>
-            <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarme a traves de las siguientes direcciones o rellenando el formulario</p>
+            <p>Si tienes alguna pregunta o necesitas más información, no dudes en hacermelo saber a traves de las siguientes direcciones o rellenando el formulario</p>
 
             <div className="contact-details">
               <div className="contact-item">
