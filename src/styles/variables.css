@@ -1,0 +1,155 @@
+/* =====================================================
+   PORTFOLIO — SISTEMA DE DISEÑO UNIFICADO
+   Nutrición & Tecnología · Variables globales
+   ===================================================== */
+
+:root {
+
+  /* ========================================
+     PALETA — Fondo y superficies (dark mode)
+     ======================================== */
+
+  --color-bg:           #0d1210;   /* negro con matiz verde muy sutil */
+  --color-bg-secondary: #131a16;   /* un paso más claro */
+  --color-surface:      #1a2420;   /* tarjetas / paneles */
+  --color-surface-alt:  #1f2d28;   /* superficies alternativas, hover suave */
+
+  /* ========================================
+     PALETA — Bordes
+     ======================================== */
+
+  --color-border:       rgba(255, 255, 255, 0.07);
+  --color-border-hover: rgba(150, 210, 170, 0.20);  /* verde suave al hover */
+  --color-border-dark:  rgba(255, 255, 255, 0.14);
+
+  /* ========================================
+     PALETA — Texto
+     ======================================== */
+
+  --color-text:           #eef2ee;  /* blanco con matiz cálido verdoso */
+  --color-text-secondary: #a8b8ae;  /* gris con undertone verde */
+  --color-text-muted:     #6b7d74;  /* texto desactivado */
+
+  /* ========================================
+     PALETA — Acento NUTRICIÓN (verde natural)
+     Uso: secciones de bio, about, nutrición
+     ======================================== */
+
+  --color-accent:          #6dbf82;  /* verde salud, vivo pero no neón */
+  --color-accent-hover:    #85d098;
+  --color-accent-subtle:   rgba(109, 191, 130, 0.12);
+
+  /* ========================================
+     PALETA — Acento TECH (azul pizarra)
+     Uso: proyectos ASIR, Full Stack, código
+     ======================================== */
+
+  --color-tech:            #5b8db8;  /* azul pizarra profesional */
+  --color-tech-hover:      #74a5d0;
+  --color-tech-subtle:     rgba(91, 141, 184, 0.12);
+
+  /* ========================================
+     PALETA — Acento PUENTE (verde-azul)
+     Uso: gradientes, CTAs, highlights
+     ======================================== */
+
+  --color-gradient-start:  #6dbf82;  /* verde nutrición */
+  --color-gradient-end:    #5b8db8;  /* azul tech */
+
+  /* ========================================
+     ESTADOS
+     ======================================== */
+
+  --color-success-bg:   rgba(109, 191, 130, 0.12);
+  --color-success-text: #86efac;
+
+  --color-error-bg:     rgba(239, 68, 68, 0.12);
+  --color-error-text:   #fca5a5;
+
+  --color-warning-bg:   rgba(251, 191, 36, 0.10);
+  --color-warning-text: #fde68a;
+
+  /* ========================================
+     TIPOGRAFÍA
+     Playfair Display → calidez / nutrición
+     DM Mono / DM Sans → claridad / tech
+     ======================================== */
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-base:    "DM Sans", system-ui, sans-serif;
+  --font-mono:    "DM Mono", "Fira Code", monospace;
+
+  /* Alias en español (compatibilidad con global.css) */
+  --fuente-titulo: var(--font-heading);
+  --fuente-base:   var(--font-base);
+
+  /* ========================================
+     ESCALA TIPOGRÁFICA
+     ======================================== */
+
+  --font-size-xs:   0.75rem;   /* 12px */
+  --font-size-sm:   0.875rem;  /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md:   1.125rem;  /* 18px */
+  --font-size-lg:   1.25rem;   /* 20px */
+  --font-size-xl:   1.5rem;    /* 24px */
+  --font-size-2xl:  2rem;      /* 32px */
+  --font-size-3xl:  3rem;      /* 48px */
+
+  /* Alias legacy */
+  --tamano-base: var(--font-size-base);
+
+  /* ========================================
+     RADIOS DE BORDE
+     ======================================== */
+
+  --radius-small:  6px;
+  --radius-medium: 14px;
+  --radius-large:  22px;
+  --radius-pill:   999px;
+
+  /* Alias en español */
+  --radio-pequeno: var(--radius-small);
+  --radio-medio:   var(--radius-medium);
+  --radio-grande:  var(--radius-large);
+
+  /* ========================================
+     SOMBRAS
+     ======================================== */
+
+  --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.20);
+  --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.28);
+  --shadow-large:  0 20px 60px rgba(0, 0, 0, 0.40);
+  --shadow-glow-green: 0 0 24px rgba(109, 191, 130, 0.18);
+  --shadow-glow-blue:  0 0 24px rgba(91, 141, 184, 0.18);
+
+  /* Alias en español */
+  --sombra-suave:  var(--shadow-soft);
+  --sombra-media:  var(--shadow-medium);
+  --sombra-fuerte: var(--shadow-large);
+
+  /* ========================================
+     LAYOUT
+     ======================================== */
+
+  --max-width: 1200px;
+
+  /* Alias en español */
+  --max-ancho: var(--max-width);
+
+  --spacing-xs:  0.5rem;
+  --spacing-sm:  1rem;
+  --spacing-md:  2rem;
+  --spacing-lg:  4rem;
+  --spacing-xl:  8rem;
+
+  --tamano-toque-min: 44px;   /* mínimo accesible para botones táctiles */
+
+  /* ========================================
+     TRANSICIONES
+     ======================================== */
+
+  --transition-fast:    0.18s ease;
+  --transition-default: 0.28s ease;
+  --transition-slow:    0.45s ease;
+}

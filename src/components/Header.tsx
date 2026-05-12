@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
+import logo from "../assets/logo.png";
 
 
 
@@ -13,11 +14,15 @@ function Header() {
     <header className="cabecera">
       <div className="cabecera-contenedor">
 
-        <Link
+       <Link
           to="/"
           className="logo"
         >
-          <img className="imgLogo" src="./assets/favicon.svg" alt="Landing" />
+          <img
+            className="imgLogo"
+            src={logo}
+            alt="Landing"
+          />
         </Link>
 
         <nav

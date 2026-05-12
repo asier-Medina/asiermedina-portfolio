@@ -38,12 +38,11 @@ export default function ContactForm() {
         </div>
 
         <div className="form-group">
-          <label>Motivo</label>
+          <label>Rol</label>
           <select name="reason" value={formData.reason} onChange={handleChange}>
-            <option value="">Selecciona un motivo</option>
-            <option value="consulta">Consulta</option>
-            <option value="dudas">Dudas</option>
-            <option value="reservas">Reservas</option>
+            <option value="">Selecciona un rol</option>
+            <option value="consulta">Particular</option>
+            <option value="dudas">Empresa</option>
             <option value="otro">Otro</option>
           </select>
           {errors.reason && <span className="error-message">{errors.reason}</span>}
@@ -55,7 +54,7 @@ export default function ContactForm() {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Cuéntanos en qué podemos ayudarte..."
+            placeholder="Cuéntame en qué puedo ayudar..."
             rows={5}
           />
           {errors.message && <span className="error-message">{errors.message}</span>}
