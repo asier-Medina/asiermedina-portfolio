@@ -31,9 +31,9 @@ function Header() {
             open ? "activo" : ""
           }`}
         >
-          <Link to="/dashboard">Conoceme</Link>
+          <Link to="/home">Conoceme</Link>
 
-          <Link to="/destinations">
+          <Link to="/Projects">
            Proyectos
           </Link>
 

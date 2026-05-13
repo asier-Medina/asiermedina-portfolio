@@ -3,6 +3,9 @@
 Se hace la estructura de carpetas siguiendo el modelo MVC para tener el trabajo estructurado y facilitar la escalabilidad
 12.10
 Se utiliza como plantilla la pagina de contacto y el header de el anterior proyecto de React para acelerar el proyecto y tener una estructura con la que ir trabajando en la rama feat/contact , tambien se incluye un css comun a todo el proyecto que se podráir modificando a medida que se avance 
+Se añade funcionalidad a los iconos de redes sociales y github 
+
+
 
 -----------------------
 ===== ./eslint.config.js =====
@@ -3147,33 +3150,41 @@ Bilbao, Basque Country
 
 -----------------------
 ===== ./src/App.tsx =====
+import "./styles/variables.css";
 import "./styles/global.css";
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header'
-import Footer from './components/Footer'
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
-
+import Home from "./pages/Home";
 
 function App() {
+  const { pathname } = useLocation();
+  const isLanding = pathname === '/';
+
   return (
     <div className="app">
-      <Header />
 
-      <main className="contenido">
+      {/* Header y Footer solo en páginas interiores */}
+      {!isLanding && <Header />}
+
+      <main className={isLanding ? '' : 'contenido'}>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/"        element={<LandingPage />} />
+          <Route path="/home"    element={<Home />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<h1>Página no encontrada</h1>} />
+          <Route path="*"        element={<h1>Página no encontrada</h1>} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isLanding && <Footer />}
+
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 -----------------------
 ===== ./src/components/ContactForm.tsx =====
 import { useContactForm } from "../hooks/useContactForm";
@@ -3299,9 +3310,9 @@ function Header() {
             open ? "activo" : ""
           }`}
         >
-          <Link to="/dashboard">Conoceme</Link>
+          <Link to="/home">Conoceme</Link>
 
-          <Link to="/destinations">
+          <Link to="/Projects">
            Proyectos
           </Link>
 
@@ -3546,7 +3557,7 @@ export default function ContactPage() {
         <div className="contact-container">
           <div className="contact-info-section">
             <h3>Contacto</h3>
-            <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarme a traves de las siguientes direcciones o rellenando el formulario</p>
+            <p>Si tienes alguna pregunta o necesitas más información, no dudes en hacermelo saber a traves de las siguientes direcciones o rellenando el formulario</p>
 
             <div className="contact-details">
               <div className="contact-item">
@@ -3650,9 +3661,147 @@ export default function ContactPage() {
   );
 } 
 -----------------------
+===== ./src/pages/Home.tsx =====
+import { Link } from "react-router-dom";
+
+export default function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+      <p>Bienvenido a mi portafolio. Aquí encontrarás información sobre mí, mis proyectos y cómo contactarme.</p>
+      <Link to="/contact">Contáctame</Link>
+    </div>
+  )
+}
+-----------------------
 ===== ./src/pages/LandingPage.tsx =====
+import { useState, useEffect, useRef } from 'react'
+import { Link } from "react-router-dom"
+import Header from "../components/Header"
+import styles from "../styles/LandingPage.module.css"
+
+const SLIDES = [
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1800&q=80',
+  'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1800&q=80',
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1800&q=80',
+]
+
+const PHRASES = [
+  'El diagnóstico es el mismo: Entender cómo.',
+  'Cambié de idioma, no de manera de pensar.',
+  'Mismo método: Prueba y Error.',
+]
+
 export default function LandingPage() {
-  return <div>LandingPage</div>
+  const [current, setCurrent]             = useState(0)
+  const [phraseIdx, setPhraseIdx]         = useState(0)
+  const [phraseVisible, setPhraseVisible] = useState(true)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(
+      () => setCurrent(c => (c + 1) % SLIDES.length),
+      4800
+    )
+  }
+
+  useEffect(() => {
+    startTimer()
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPhraseVisible(false)
+      setTimeout(() => {
+        setPhraseIdx(i => (i + 1) % PHRASES.length)
+        setPhraseVisible(true)
+      }, 380)
+    }, 3800)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <div className={styles.root}>
+
+      {/* Header flotante sobre los slides */}
+      <div className={styles.headerWrap}>
+        <Header />
+      </div>
+
+      {/* Slides */}
+      <div className={styles.slides} aria-hidden="true">
+        {SLIDES.map((src, i) => (
+          <div
+            key={src}
+            className={`${styles.slide} ${i === current ? styles.active : ''}`}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
+      </div>
+
+      {/* Grain */}
+      <div className={styles.grain} aria-hidden="true" />
+
+      {/* Contenido principal */}
+      <main className={styles.content}>
+
+        <h1 className={styles.headline}>
+          No cambié de rumbo.<br />
+          Cambié de <em className={styles.pivot}>herramientas.</em>
+        </h1>
+
+        <div className={styles.rotatorWrap} aria-live="polite">
+          <p className={`${styles.phrase} ${phraseVisible ? styles.phraseIn : styles.phraseOut}`}>
+            {PHRASES[phraseIdx]}
+          </p>
+        </div>
+
+        <p className={styles.bio}>
+          Soy Nutricionista con años de práctica clínica y un giro
+          deliberado hacia la tecnología. Hoy estudio{' '}
+          <strong>ASIR</strong> y desarrollo web full stack en{' '}
+          <strong>The Bridge</strong>, construyendo un perfil difícil
+          de definir en un currículum estándar.
+        </p>
+
+        <div className={styles.badges}>
+          <span className={`${styles.badge} ${styles.badgeGreen}`}>Nutrición clínica</span>
+          <span className={`${styles.badge} ${styles.badgeBlue}`}>ASIR · Redes</span>
+          <span className={`${styles.badge} ${styles.badgeBlue}`}>Full Stack · The Bridge</span>
+        </div>
+
+        <div className={styles.cta}>
+          <Link to="/home" className={styles.btn}>
+            <span>Conóceme</span>
+            <svg viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth={2.2}
+              strokeLinecap="round" strokeLinejoin="round"
+              aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
+      </main>
+
+      {/* Dots */}
+      <div className={styles.dots}>
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
+            onClick={() => { setCurrent(i); startTimer() }}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+   
+
+    </div>
+  )
 }
 -----------------------
 ===== ./src/styles/ContactPage.css =====
@@ -4051,10 +4200,6 @@ export default function LandingPage() {
    Importa siempre después de variables.css
    ===================================================== */
 
-/* Google Fonts — cargar en el <head> del HTML:
-   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-*/
-
 /* ========================================
    RESET
    ======================================== */
@@ -4129,8 +4274,19 @@ a {
   transition: color var(--transition-fast);
 }
 
-a:hover {
-  color: var(--color-accent-hover);
+.nav a {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+
+  color: var(--color-text-secondary);
+
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-accent);
 }
 
 /* ========================================
@@ -4266,10 +4422,12 @@ button { font: inherit; cursor: pointer; }
    ======================================== */
 
 .cabecera {
-  background: rgba(13, 18, 16, 0.80);
+  background: rgba(13, 18, 16, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+
   border-bottom: 1px solid var(--color-border);
+
   position: sticky;
   top: 0;
   z-index: 50;
@@ -4278,49 +4436,57 @@ button { font: inherit; cursor: pointer; }
 .cabecera-contenedor {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem var(--layout-x);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  min-height: 72px;
 }
 
-.imgLogo { max-width: 150px; }
+.imgLogo {
+  max-width: 110px;
+  width: 100%;
+  height: auto;
+}
 
-.logo { text-decoration: none; }
-.logo:hover { color: var(--color-accent); }
-
-/* ========================================
-   NAVEGACIÓN
-   ======================================== */
+/* .nav en global.css = nav de la cabecera fija del sitio */
+.nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
 
 .nav-central {
-  display: none;
-  gap: 2rem;
+  display: flex;
+  gap: 3rem;
   align-items: center;
 }
 
 .nav-link {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-base);
-  font-family: var(--font-base);
-  padding: 0.4rem 0.2rem;
+
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+
+  padding-bottom: 0.3rem;
+
   border-bottom: 2px solid transparent;
-  text-decoration: none;
-  transition: border-color var(--transition-fast),
-              color var(--transition-fast);
+
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .nav-link:hover {
   color: var(--color-text);
-  border-bottom-color: var(--color-border-dark);
-  text-decoration: none;
-}
 
-.nav-link.activo {
-  color: var(--color-accent);
   border-bottom-color: var(--color-accent);
-  font-weight: 600;
+}
+.hero {
+  padding-top: 4rem;
+}
+.hero-content {
+  padding-top: 3rem;
 }
 
 /* ========================================
@@ -4550,15 +4716,29 @@ button { font: inherit; cursor: pointer; }
 
 /* ========================================
    CONTENIDO PRINCIPAL
+   (páginas interiores: Contact, Home, etc.)
    ======================================== */
 
 #contenido,
 .contenido {
   flex: 1;
-  max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 0;          /* padding gestionado por cada página */
+}
+
+/* La landing ocupa todo el viewport: anular restricciones del wrapper */
+.contenido:has(> [class*="root"]) {
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* App shell */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 /* ========================================
@@ -4597,14 +4777,12 @@ button { font: inherit; cursor: pointer; }
    ======================================== */
 
 @media (min-width: 768px) {
-  .cabecera-contenedor { padding: 0.8rem 1.5rem; }
-  #contenido, .contenido { padding: 1.5rem 1.5rem; }
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
   .pie-contenedor { flex-direction: row; }
 }
 
 @media (min-width: 1024px) {
-  .cabecera-contenedor { padding: 0.8rem 2rem; }
-  #contenido, .contenido { padding: 2rem 2rem; }
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
   .nav-central { display: flex; }
   .boton-hamburguesa { display: none; }
 
@@ -4650,7 +4828,363 @@ button { font: inherit; cursor: pointer; }
   }
   html { scroll-behavior: auto; }
 }
+-----------------------
+===== ./src/styles/LandingPage.module.css =====
+/* ═══════════════════════════════════════════════
+   LandingPage.module.css
+   Landing fullscreen — Header incluido dentro
+   ═══════════════════════════════════════════════ */
 
+/* ── Raíz: fullscreen real ── */
+.root {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header flotante sobre slides ── */
+.headerWrap {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  /* El header tiene su propio fondo blur; aquí lo volvemos transparente */
+  background: transparent;
+}
+
+/* Sobreescribir el fondo del header cuando está en la landing */
+.headerWrap :global(.cabecera) {
+  background: rgba(10, 16, 13, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: static;   /* deja de ser sticky aquí; el root es fixed */
+}
+
+/* ── Slides ── */
+.slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  will-change: opacity;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      108deg,
+      rgba(10, 16, 13, 0.88) 0%,
+      rgba(10, 16, 13, 0.55) 42%,
+      rgba(10, 16, 13, 0.12) 100%
+    );
+}
+
+.active { opacity: 1; }
+
+/* ── Grain ── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* ── Contenido: ocupa el espacio restante debajo del header ── */
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;                    /* crece para llenar el espacio bajo el header */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* centrado vertical en ese espacio */
+
+  padding: 0 var(--layout-x) 5rem;
+  max-width: min(860px, 100%);
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--font-base);
+  font-size: clamp(0.62rem, 1vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.3s forwards;
+}
+
+/* Headline */
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+
+.pivot {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+/* Phrase rotator */
+.rotatorWrap {
+  margin-top: 1.2rem;
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 1s 0.72s forwards;
+}
+
+.phrase {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.1vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  margin: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.phraseIn  { opacity: 1; transform: translateY(0); }
+.phraseOut { opacity: 0; transform: translateY(-8px); }
+
+/* Bio */
+.bio {
+  font-family: var(--font-base);
+  font-size: clamp(0.88rem, 1.25vw, 1rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+  margin-top: 1.6rem;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 1s 0.95s forwards;
+}
+
+.bio strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Badges */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.1s forwards;
+}
+
+.badge {
+  font-family: var(--font-base);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.78rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.badgeGreen {
+  border-color: rgba(109, 191, 130, 0.32);
+  color: var(--color-accent);
+}
+
+.badgeBlue {
+  border-color: rgba(91, 141, 184, 0.32);
+  color: var(--color-tech);
+}
+
+/* CTA */
+.cta {
+  margin-top: 2.2rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.25s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.88rem 2.1rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  transition:
+    transform var(--transition-default),
+    box-shadow var(--transition-default),
+    opacity var(--transition-default);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-green);
+  opacity: 0.9;
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transition-default);
+}
+
+.btn:hover svg { transform: translateX(4px); }
+
+/* ── Dots ── */
+.dots {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(238, 242, 238, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background var(--transition-default),
+    height var(--transition-default),
+    border-radius var(--transition-default);
+}
+
+.dotActive {
+  background: var(--color-accent);
+  height: 20px;
+  border-radius: 3px;
+}
+
+/* ── Scroll hint ── */
+.scrollHint {
+  position: absolute;
+  bottom: 1.8rem;
+  left: var(--layout-x);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  opacity: 0;
+  animation: fadeIn 1s 2s forwards;
+}
+
+.scrollLine {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-accent), transparent);
+  animation: pulse 2.2s infinite;
+}
+
+.scrollHint span {
+  font-family: var(--font-base);
+  font-size: 0.63rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .content   { max-width: 100%; }
+  .dots      { right: 0.8rem; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .content {
+    justify-content: flex-end;
+    padding: 0 1.4rem 4.5rem;
+    max-width: 100%;
+  }
+
+  .headline     { font-size: clamp(1.85rem, 8.5vw, 2.5rem); }
+  .phrase       { font-size: clamp(0.88rem, 3.8vw, 1.1rem); }
+  .bio          { max-width: 100%; font-size: 0.86rem; margin-top: 1rem; }
+  .badges       { gap: 0.35rem; margin-top: 0.9rem; }
+  .badge        { font-size: 0.6rem; padding: 0.22rem 0.6rem; }
+  .cta          { margin-top: 1.4rem; }
+  .btn          { padding: 0.78rem 1.7rem; font-size: 0.86rem; }
+  .dots, .scrollHint { display: none; }
+}
+
+/* Reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .slide, .phrase, .btn, .dot { transition: none !important; }
+
+  .eyebrow, .headline, .rotatorWrap,
+  .bio, .badges, .cta, .scrollHint {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
 -----------------------
 ===== ./src/styles/variables.css =====
 /* =====================================================
@@ -4788,6 +5322,7 @@ button { font: inherit; cursor: pointer; }
      ======================================== */
 
   --max-width: 1200px;
+  --layout-x: clamp(24px, 6vw, 96px);
 
   /* Alias en español */
   --max-ancho: var(--max-width);

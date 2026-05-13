@@ -77,8 +77,19 @@ a {
   transition: color var(--transition-fast);
 }
 
-a:hover {
-  color: var(--color-accent-hover);
+.nav a {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+
+  color: var(--color-text-secondary);
+
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-accent);
 }
 
 /* ========================================
@@ -214,10 +225,12 @@ button { font: inherit; cursor: pointer; }
    ======================================== */
 
 .cabecera {
-  background: rgba(13, 18, 16, 0.80);
+  background: rgba(13, 18, 16, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+
   border-bottom: 1px solid var(--color-border);
+
   position: sticky;
   top: 0;
   z-index: 50;
@@ -225,50 +238,58 @@ button { font: inherit; cursor: pointer; }
 
 .cabecera-contenedor {
   max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  margin: 0 ;
+  padding: 1rem var(--layout-x);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  min-height: 72px;
 }
 
-.imgLogo { max-width: 80px; }
+.imgLogo {
+  max-width: 85px;
+  width: 100%;
+  height: auto;
+}
 
-.logo { text-decoration: none; }
-.logo:hover { color: var(--color-accent); }
-
-/* ========================================
-   NAVEGACIÓN
-   ======================================== */
+/* .nav en global.css = nav de la cabecera fija del sitio */
+.nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
 
 .nav-central {
-  display: none;
-  gap: 2rem;
+  display: flex;
+  gap: 3rem;
   align-items: center;
 }
 
 .nav-link {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-base);
-  font-family: var(--font-base);
-  padding: 0.4rem 0.2rem;
+
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+
+  padding-bottom: 0.3rem;
+
   border-bottom: 2px solid transparent;
-  text-decoration: none;
-  transition: border-color var(--transition-fast),
-              color var(--transition-fast);
+
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .nav-link:hover {
   color: var(--color-text);
-  border-bottom-color: var(--color-border-dark);
-  text-decoration: none;
-}
 
-.nav-link.activo {
-  color: var(--color-accent);
   border-bottom-color: var(--color-accent);
-  font-weight: 600;
+}
+.hero {
+  padding-top: 4rem;
+}
+.hero-content {
+  padding-top: 3rem;
 }
 
 /* ========================================
@@ -498,15 +519,29 @@ button { font: inherit; cursor: pointer; }
 
 /* ========================================
    CONTENIDO PRINCIPAL
+   (páginas interiores: Contact, Home, etc.)
    ======================================== */
 
 #contenido,
 .contenido {
   flex: 1;
-  max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 0;          /* padding gestionado por cada página */
+}
+
+/* La landing ocupa todo el viewport: anular restricciones del wrapper */
+.contenido:has(> [class*="root"]) {
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* App shell */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 /* ========================================
@@ -545,14 +580,12 @@ button { font: inherit; cursor: pointer; }
    ======================================== */
 
 @media (min-width: 768px) {
-  .cabecera-contenedor { padding: 0.8rem 1.5rem; }
-  #contenido, .contenido { padding: 1.5rem 1.5rem; }
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
   .pie-contenedor { flex-direction: row; }
 }
 
 @media (min-width: 1024px) {
-  .cabecera-contenedor { padding: 0.8rem 2rem; }
-  #contenido, .contenido { padding: 2rem 2rem; }
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
   .nav-central { display: flex; }
   .boton-hamburguesa { display: none; }
 

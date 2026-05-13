@@ -133,6 +133,7 @@
      ======================================== */
 
   --max-width: 1200px;
+  --layout-x: clamp(24px, 6vw, 96px);
 
   /* Alias en español */
   --max-ancho: var(--max-width);
