@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback} from 'react'
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import styles from "../styles/LandingPage.module.css"
@@ -20,30 +20,48 @@ export default function LandingPage() {
   const [phraseIdx, setPhraseIdx]         = useState(0)
   const [phraseVisible, setPhraseVisible] = useState(true)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const phraseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const startTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current)
-    timerRef.current = setInterval(
-      () => setCurrent(c => (c + 1) % SLIDES.length),
-      4800
-    )
-  }
+  const startTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+    }
+
+    timerRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % SLIDES.length)
+    }, 4800)
+
+  }, [])
 
   useEffect(() => {
     startTimer()
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [])
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [startTimer])
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setPhraseVisible(false)
-      setTimeout(() => {
-        setPhraseIdx(i => (i + 1) % PHRASES.length)
-        setPhraseVisible(true)
-      }, 380)
-    }, 3800)
-    return () => clearInterval(id)
-  }, [])
+  const id = setInterval(() => {
+    setPhraseVisible(false)
+
+    phraseTimeoutRef.current = setTimeout(() => {
+      setPhraseIdx(i => (i + 1) % PHRASES.length)
+      setPhraseVisible(true)
+    }, 380)
+
+  }, 3800)
+
+  return () => {
+    clearInterval(id)
+
+    if (phraseTimeoutRef.current) {
+      clearTimeout(phraseTimeoutRef.current)
+    }
+  }
+}, [])
 
   return (
     <div className={styles.root}>

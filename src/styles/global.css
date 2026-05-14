@@ -329,6 +329,19 @@ button { font: inherit; cursor: pointer; }
   background: var(--color-text);
   border-radius: 2px;
 }
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  z-index: 80;
+}
+
+
+.nav-central.activo {
+  z-index: 50;
+}
 
 /* ========================================
    MENÚ LATERAL (móvil)
@@ -630,4 +643,27 @@ button { font: inherit; cursor: pointer; }
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+.home-scroll-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  border-radius: 50%;
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0 ;
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default);}
+
+.home-scroll-top-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }

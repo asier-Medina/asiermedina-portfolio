@@ -1,9 +1,13 @@
 ===== ./DOCS/resumen.md =====
-11.10
+11.05
 Se hace la estructura de carpetas siguiendo el modelo MVC para tener el trabajo estructurado y facilitar la escalabilidad
-12.10
+12.05
 Se utiliza como plantilla la pagina de contacto y el header de el anterior proyecto de React para acelerar el proyecto y tener una estructura con la que ir trabajando en la rama feat/contact , tambien se incluye un css comun a todo el proyecto que se podráir modificando a medida que se avance 
 Se añade funcionalidad a los iconos de redes sociales y github 
+13.05
+Se desarrolla la parte del landing, con una breve descripción personal y una seríe de slides de imagenes y texto para dar dinamismo a la landing 
+14.05
+
 
 
 
@@ -3158,10 +3162,13 @@ import Footer from './components/Footer';
 import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import Home from "./pages/Home";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 function App() {
   const { pathname } = useLocation();
   const isLanding = pathname === '/';
+  const showScrollButton = pathname !== '/';
+
 
   return (
     <div className="app">
@@ -3179,6 +3186,7 @@ function App() {
       </main>
 
       {!isLanding && <Footer />}
+      {showScrollButton && <ScrollToTopButton />}
 
     </div>
   );
@@ -3277,71 +3285,96 @@ function Footer() {
 export default Footer;
 -----------------------
 ===== ./src/components/Header.tsx =====
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import logo from "../assets/logo.png";
-
-
-
 
 function Header() {
   const [open, setOpen] = useState(false);
 
+  const location = useLocation();
+
+  // Cierra automáticamente al cambiar de página
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  // Bloquea scroll cuando menú abierto
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
-    <header className="cabecera">
-      <div className="cabecera-contenedor">
+    <>
+      <header className="cabecera">
+        <div className="cabecera-contenedor">
 
-       <Link
-          to="/"
-          className="logo"
-        >
-          <img
-            className="imgLogo"
-            src={logo}
-            alt="Landing"
-          />
-        </Link>
-
-        <nav
-          id="main-navigation"
-          className={`nav-central ${
-            open ? "activo" : ""
-          }`}
-        >
-          <Link to="/home">Conoceme</Link>
-
-          <Link to="/Projects">
-           Proyectos
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className="logo"
+          >
+            <img
+              className="imgLogo"
+              src={logo}
+              alt="Volver al inicio"
+            />
           </Link>
 
-          <Link to="/contact">
-            Contacto
-          </Link>
+          <nav
+            id="main-navigation"
+            className={`nav-central ${open ? "activo" : ""}`}
+          >
+            <Link
+              to="/home"
+              onClick={() => setOpen(false)}
+            >
+              Conóceme
+            </Link>
 
-        </nav>
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Contacto
+            </Link>
+          </nav>
 
-        <button
-          className="boton-hamburguesa"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={open}
-          aria-controls="main-navigation"
-        >
-          ☰
-        </button>
+          <button
+            className="boton-hamburguesa"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={open}
+            aria-controls="main-navigation"
+          >
+            ☰
+          </button>
 
-      </div>
-    </header>
+        </div>
+      </header>
+
+      {/* Overlay */}
+      {open && (
+        <div
+          className="menu-overlay"
+          onClick={() => setOpen(false)}
+        />
+      )}
+    </>
   );
 }
 
 export default Header;
-
 -----------------------
 ===== ./src/components/ScrollToTopButton.tsx =====
 import { useState, useEffect } from 'react';
+
 
 function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
@@ -3386,10 +3419,6 @@ function ScrollToTopButton() {
 }
 
 export default ScrollToTopButton;
-
------------------------
-===== ./src/context/context.tsx =====
-//aqui va el context   
 
 -----------------------
 ===== ./src/hooks/useContactForm.ts =====
@@ -3542,8 +3571,6 @@ export interface StoredMessage extends ContactFormData {
 ===== ./src/pages/ContactPage.tsx =====
 import ContactForm from "../components/ContactForm";
 import "../styles/ContactPage.css";
-import "../styles/variables.css";
-import "../styles/global.css";
 
 export default function ContactPage() {
   return (
@@ -3662,20 +3689,303 @@ export default function ContactPage() {
 } 
 -----------------------
 ===== ./src/pages/Home.tsx =====
-import { Link } from "react-router-dom";
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import styles from "../styles/Home.module.css"
+
+/* ── Timeline ── */
+const TIMELINE = [
+  {
+    period: "2015 – 2017",
+    role: "Nutricionista",
+    org: "Sodexo · Hospital de Górliz",
+    color: "green",
+    desc: "Primer contacto con entornos clínicos reales. Gestión de pacientes, trabajo con equipos multidisciplinares y toma de decisiones bajo presión.",
+  },
+  {
+    period: "2018 – 2019",
+    role: "Nutricionista de campo",
+    org: "Ayuda en Acción · Sierra Sur de Oaxaca, México",
+    color: "green",
+    desc: "Trabajo en terreno con comunidades rurales en México. Coordinación de talleres, diseño de metodología junto a socios locales (EECOS-INCIDE) y adaptación constante a contextos sin recursos ni manual.",
+  },
+  {
+    period: "2020 – 2025",
+    role: "Gestión comercial",
+    org: "Pepe Navarro S.L. · España",
+    color: "green",
+    desc: "5 años gestionando secciones de tienda: pedidos, proveedores, inventario, facturas. Aprendí que la logística y los datos importan en cualquier sector.",
+  },
+    {
+    period: "2025 – actualidad",
+    role: "Estudiante de Administración de sistemas informáticos en red",
+    org: "BirtLH · Bilbao",
+    color: "blue",
+    desc: "Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
+  },
+  {
+    period: "2026 – actualidad",
+    role: "Bootcamp de Desarrollo Web Full-Stack",
+    org: "The Bridge Bootcamp · Bilbao",
+    color: "blue",
+    desc:"Desarrollo de proyectos reales en equipo desde el primer día, formandonos tanto en Frontend como en Backend para poder desarrollar aplicaciones completas.",
+  },
+]
+
+/* ── Soft skills ── */
+const SKILLS = [
+  {
+    icon: "🧩",
+    title: "Adaptabilidad extrema",
+    desc: "De una consulta clínica a un campo en México, de ahí a una tienda, y ahora al código. Cada entorno ha sido un idioma nuevo que aprendí desde cero.",
+  },
+  {
+    icon: "🔍",
+    title: "Diagnóstico y análisis",
+    desc: "Años escuchando síntomas que no encajaban me enseñaron a buscar la causa raíz, no el síntoma. Lo mismo hago con un bug o un requisito mal definido.",
+  },
+  {
+    icon: "🤝",
+    title: "Empatía funcional",
+    desc: "Trabajo con pacientes, con comunidades rurales, con clientes de tienda. Sé leer a las personas antes de abrirles la boca. Eso se lleva al equipo de desarrollo.",
+  },
+  {
+    icon: "🌍",
+    title: "Inteligencia intercultural",
+    desc: "Coordiné proyectos en contextos donde el idioma, la cultura y los recursos eran completamente diferentes a los míos. La comunicación no siempre es verbal.",
+  },
+  {
+    icon: "🔁",
+    title: "Aprendizaje continuo",
+    desc: "No esperé a tener el perfil perfecto para cambiar. Empecé, me equivoqué, corregí. El ciclo prueba-error es el mismo en nutrición que en desarrollo.",
+  },
+  {
+    icon: "📦",
+    title: "Gestión bajo presión",
+    desc: "Inventario roto un viernes por la tarde, paciente en urgencias, taller sin materiales. La presión no me paraliza, me organiza.",
+  },
+]
+
+/* ── Proyectos ── */
+const PROJECTS = [
+  {
+    name: "ONzero",
+    desc: "App anti-desperdicio alimentario creada durante el Prompt-a-thon de BBK + The Bridge. Los usuarios introducen lo que tienen en casa y la app sugiere recetas.",
+    stack: ["JavaScript", "React", "Node.js"],
+    url: "https://github.com/asier-Medina/PROMPATON_OnZero",
+    highlight: true,
+  },
+   {
+    name: "Tasuku-project",
+    desc: "Web app para gestionar y repartir tareas en espacios compartidos. incorpora un sistema de gamificación con puntos que incentiva completar las tareas antes y fomenta la colaboración entre los usuarios. ",
+    stack: ["HTML", "JavaScript","CSS"],
+    url: "https://github.com/asier-Medina/tasuku-project",
+    highlight: false,
+  },
+  {
+    name: "POKEback",
+    desc: "Sistema backend completo para gestión de equipos Pokémon: usuarios, equipos, tienda y lógica de juego con PostgreSQL.",
+    stack: ["JavaScript", "PostgreSQL", "Express"],
+    url: "https://github.com/asier-Medina/POKEback",
+    highlight: false,
+  },
+  {
+    name: "BIDAIAgo",
+    desc: "Aplicación web orientada a la exploración de destinos de viaje accesibles e informativos.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/BidaiaGo",
+    highlight: false,
+  },
+    {
+    name: "Asiermedina-portfolio",
+    desc: "Lo que estas viendo ahora: un portfolio personal que rompe con el formato tradicional, diseñado para destacar soft-skills y trayectoria personal.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/asiermedina-portfolio",
+    highlight: false,
+  },
+
+]
+
+/* ── Tech stack ── */
+const TECH = [
+  { label: "React",       color: "blue" },
+  { label: "Node.js",     color: "green" },
+  { label: "Express",     color: "blue" },
+  { label: "PostgreSQL",  color: "blue" },
+  { label: "MongoDB",     color: "green" },
+  { label: "Docker",      color: "blue" },
+  { label: "Git / GitHub",color: "green" },
+  { label: "JWT",         color: "blue" },
+  { label: "REST APIs",   color: "blue" },
+  { label: "TypeScript",  color: "blue" },
+  { label: "ASIR",        color: "green" },
+  { label: "Redes",       color: "green" },
+]
 
 export default function Home() {
+  const [activeSkill, setActiveSkill] = useState<number | null>(null)
+
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Bienvenido a mi portafolio. Aquí encontrarás información sobre mí, mis proyectos y cómo contactarme.</p>
-      <Link to="/contact">Contáctame</Link>
+    <div className={styles.page}>
+
+      {/* ══ HERO / INTRO ══ */}
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <p className={styles.eyebrow}>Sobre mí</p>
+          <h1 className={styles.heroTitle}>
+            Un perfil que no cabe<br />
+            en <em>ninguna casilla.</em>
+          </h1>
+          <p className={styles.heroBio}>
+            Soy Asier. Nutricionista de formación, con experiencia en clínica, en
+            cooperación internacional y gestión comercial. Desde 2025 estudio
+            Administración de redes en BirtLH y en 2026 inicié Desarrollo web full stack en The Bridge, Bilbao.
+          </p>
+          <div className={styles.heroCtas}>
+            <a
+              href="https://www.linkedin.com/in/asiermedinalaboral/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnPrimary}
+            >
+              Ver Linkedin
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+                aria-hidden="true">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+              </svg>
+            </a>
+            <Link to="/contact" className={styles.btnSecondary}>
+              Contacto
+            </Link>
+          </div>
+        </div>
+
+
+      </section>
+
+      {/* ══ TIMELINE ══ */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Trayectoria</p>
+          <h2 className={styles.sectionTitle}>El camino hasta aquí</h2>
+        </div>
+
+        <div className={styles.timeline}>
+          {TIMELINE.map((item, i) => (
+            <div key={i} className={`${styles.timelineItem} ${styles[`tl${item.color}`]}`}>
+              <div className={styles.tlDot} />
+              <div className={styles.tlBody}>
+                <span className={styles.tlPeriod}>{item.period}</span>
+                <h3 className={styles.tlRole}>{item.role}</h3>
+                <p className={styles.tlOrg}>{item.org}</p>
+                <p className={styles.tlDesc}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ SOFT SKILLS ══ */}
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Lo que no aparece en un CV</p>
+          <h2 className={styles.sectionTitle}>Soft skills</h2>
+        </div>
+
+        <div className={styles.skillsGrid}>
+          {SKILLS.map((sk, i) => (
+            <div
+              key={i}
+              className={`${styles.skillCard} ${activeSkill === i ? styles.skillActive : ''}`}
+              onMouseEnter={() => setActiveSkill(i)}
+              onMouseLeave={() => setActiveSkill(null)}
+            >
+              <span className={styles.skillIcon}>{sk.icon}</span>
+              <h3 className={styles.skillTitle}>{sk.title}</h3>
+              <p className={styles.skillDesc}>{sk.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ TECH STACK ══ */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Herramientas actuales</p>
+          <h2 className={styles.sectionTitle}>Stack técnico</h2>
+        </div>
+
+        <div className={styles.techGrid}>
+          {TECH.map((t, i) => (
+            <span
+              key={i}
+              className={`${styles.techTag} ${t.color === 'green' ? styles.techGreen : styles.techBlue}`}
+            >
+              {t.label}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ PROYECTOS ══ */}
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Código real</p>
+          <h2 className={styles.sectionTitle}>Proyectos</h2>
+        </div>
+
+        <div className={styles.projectsGrid}>
+          {PROJECTS.map((p, i) => (
+            <a
+              key={i}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.projectCard} ${p.highlight ? styles.projectHighlight : ''}`}
+            >
+              {p.highlight && (
+                <span className={styles.projectBadge}>Hackathon </span>
+              )}
+              <h3 className={styles.projectName}>{p.name}</h3>
+              <p className={styles.projectDesc}>{p.desc}</p>
+              <div className={styles.projectStack}>
+                {p.stack.map(s => (
+                  <span key={s} className={styles.projectTag}>{s}</span>
+                ))}
+              </div>
+              <span className={styles.projectLink}>
+                Ver en GitHub →
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ CTA FINAL ══ */}
+      <section className={styles.ctaSection}>
+        <h2 className={styles.ctaTitle}>¿Hablamos?</h2>
+        <p className={styles.ctaText}>
+          Estoy buscando mi primer rol en tech. Si crees que este perfil encaja
+          en tu equipo, me alegra escucharte.
+        </p>
+        <Link to="/contact" className={styles.btnPrimary}>
+          Escríbeme
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+            aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </section>
+
     </div>
   )
 }
+
 -----------------------
 ===== ./src/pages/LandingPage.tsx =====
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback} from 'react'
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import styles from "../styles/LandingPage.module.css"
@@ -3697,30 +4007,48 @@ export default function LandingPage() {
   const [phraseIdx, setPhraseIdx]         = useState(0)
   const [phraseVisible, setPhraseVisible] = useState(true)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const phraseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const startTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current)
-    timerRef.current = setInterval(
-      () => setCurrent(c => (c + 1) % SLIDES.length),
-      4800
-    )
-  }
+  const startTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+    }
+
+    timerRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % SLIDES.length)
+    }, 4800)
+
+  }, [])
 
   useEffect(() => {
     startTimer()
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [])
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [startTimer])
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setPhraseVisible(false)
-      setTimeout(() => {
-        setPhraseIdx(i => (i + 1) % PHRASES.length)
-        setPhraseVisible(true)
-      }, 380)
-    }, 3800)
-    return () => clearInterval(id)
-  }, [])
+  const id = setInterval(() => {
+    setPhraseVisible(false)
+
+    phraseTimeoutRef.current = setTimeout(() => {
+      setPhraseIdx(i => (i + 1) % PHRASES.length)
+      setPhraseVisible(true)
+    }, 380)
+
+  }, 3800)
+
+  return () => {
+    clearInterval(id)
+
+    if (phraseTimeoutRef.current) {
+      clearTimeout(phraseTimeoutRef.current)
+    }
+  }
+}, [])
 
   return (
     <div className={styles.root}>
@@ -4444,7 +4772,7 @@ button { font: inherit; cursor: pointer; }
 }
 
 .imgLogo {
-  max-width: 110px;
+  max-width: 85px;
   width: 100%;
   height: auto;
 }
@@ -4525,6 +4853,19 @@ button { font: inherit; cursor: pointer; }
   height: 2px;
   background: var(--color-text);
   border-radius: 2px;
+}
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  z-index: 80;
+}
+
+
+.nav-central.activo {
+  z-index: 50;
 }
 
 /* ========================================
@@ -4828,6 +5169,581 @@ button { font: inherit; cursor: pointer; }
   }
   html { scroll-behavior: auto; }
 }
+.landing-scroll-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  border-radius: 50%;
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default);}
+-----------------------
+===== ./src/styles/Home.module.css =====
+/* ═══════════════════════════════════════════════
+   Home.module.css
+   Usa las variables de src/styles/variables.css
+   ═══════════════════════════════════════════════ */
+
+.page {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-x);
+}
+
+/* ══════════════════════════════
+   HERO
+   ══════════════════════════════ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+  min-height: 70vh;
+  position: relative;
+}
+
+.heroInner { max-width: 680px; }
+
+.eyebrow {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.2rem;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle em {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+.heroBio {
+  font-family: var(--font-base);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  margin-bottom: 2.4rem;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Decoración lateral */
+.heroAccent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.18;
+  user-select: none;
+}
+
+.accentLine {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--color-accent), var(--color-tech));
+}
+
+.accentText {
+  font-family: var(--font-base);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  writing-mode: vertical-rl;
+}
+
+/* ══════════════════════════════
+   BOTONES
+   ══════════════════════════════ */
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default),
+              opacity var(--transition-default);
+}
+
+.btnPrimary svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: transform var(--transition-default);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-green);
+  opacity: 0.9;
+  text-decoration: none;
+  color: var(--color-bg);
+}
+
+.btnPrimary:hover svg { transform: translate(3px, -3px); }
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-dark);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: transparent;
+  transition: border-color var(--transition-default),
+              color var(--transition-default),
+              background var(--transition-default);
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════
+   SECCIONES
+   ══════════════════════════════ */
+
+.section {
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.sectionAlt {
+  background: var(--color-surface);
+  margin: 0 calc(-1 * var(--layout-x));
+  padding: var(--spacing-lg) var(--layout-x);
+  border-top: none;
+}
+
+.sectionHeader {
+  margin-bottom: var(--spacing-md);
+}
+
+.sectionLabel {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+/* ══════════════════════════════
+   TIMELINE
+   ══════════════════════════════ */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* línea vertical continua */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent),
+    var(--color-tech)
+  );
+  opacity: 0.3;
+}
+
+.timelineItem {
+  position: relative;
+  padding: 1.6rem 0 1.6rem 1.8rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-default);
+  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+}
+
+.timelineItem:last-child { border-bottom: none; }
+
+.timelineItem:hover { background: var(--color-surface); }
+
+/* Dot lateral */
+.tlDot {
+  position: absolute;
+  left: -2.45rem;
+  top: 1.9rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-dark);
+  background: var(--color-bg);
+  transition: border-color var(--transition-default),
+              background var(--transition-default);
+}
+
+.tlgreen .tlDot {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+.tlblue .tlDot {
+  border-color: var(--color-tech);
+  background: var(--color-tech-subtle);
+}
+
+.tlneutral .tlDot {
+  border-color: var(--color-border-dark);
+}
+
+.tlBody { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.tlPeriod {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.tlRole {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+.tlOrg {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.tlblue .tlOrg { color: var(--color-tech); }
+.tlneutral .tlOrg { color: var(--color-text-muted); }
+
+.tlDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 680px;
+  margin-top: 0.4rem;
+}
+
+/* ══════════════════════════════
+   SOFT SKILLS
+   ══════════════════════════════ */
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.skillCard {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: 1.6rem;
+  cursor: default;
+  transition: border-color var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.skillCard:hover,
+.skillActive {
+  border-color: var(--color-border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+}
+
+.skillIcon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.skillTitle {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.skillDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* ══════════════════════════════
+   TECH STACK
+   ══════════════════════════════ */
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.techTag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.techTag:hover {
+  transform: translateY(-2px);
+}
+
+.techGreen {
+  border-color: rgba(109, 191, 130, 0.28);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+.techBlue {
+  border-color: rgba(91, 141, 184, 0.28);
+  color: var(--color-tech);
+  background: var(--color-tech-subtle);
+}
+
+/* ══════════════════════════════
+   PROYECTOS
+   ══════════════════════════════ */
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: 1.6rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.projectCard:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  text-decoration: none;
+}
+
+.projectHighlight {
+  border-color: rgba(109, 191, 130, 0.22);
+  background: linear-gradient(
+    135deg,
+    rgba(109, 191, 130, 0.05) 0%,
+    rgba(91, 141, 184, 0.04) 100%
+  );
+}
+
+.projectBadge {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start),
+    var(--color-gradient-end)
+  );
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-pill);
+  align-self: flex-start;
+}
+
+.projectName {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.projectDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.projectStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.projectTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-muted);
+}
+
+.projectLink {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+  margin-top: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.projectCard:hover .projectLink { color: var(--color-accent-hover); }
+
+/* ══════════════════════════════
+   CTA FINAL
+   ══════════════════════════════ */
+
+.ctaSection {
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+}
+
+.ctaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.ctaText {
+  font-family: var(--font-base);
+  font-size: var(--font-size-md);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 480px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+
+@media (max-width: 900px) {
+  .skillsGrid    { grid-template-columns: repeat(2, 1fr); }
+  .projectsGrid  { grid-template-columns: repeat(2, 1fr); }
+  .heroAccent    { display: none; }
+  .hero          { grid-template-columns: 1fr; min-height: auto; }
+}
+
+@media (max-width: 600px) {
+  .page          { padding: 0 1.4rem; }
+  .skillsGrid    { grid-template-columns: 1fr; }
+  .projectsGrid  { grid-template-columns: 1fr; }
+  .timeline      { padding-left: 1.4rem; }
+  .sectionAlt    {
+    margin: 0 -1.4rem;
+    padding: var(--spacing-md) 1.4rem;
+  }
+  .heroCtas      { flex-direction: column; }
+  .btnPrimary,
+  .btnSecondary  { justify-content: center; }
+}
+
 -----------------------
 ===== ./src/styles/LandingPage.module.css =====
 /* ═══════════════════════════════════════════════

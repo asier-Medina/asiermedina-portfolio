@@ -30,14 +30,14 @@ const TIMELINE = [
     role: "Estudiante de Administración de sistemas informáticos en red",
     org: "BirtLH · Bilbao",
     color: "blue",
-    desc: " Node.js, Express, PostgreSQL, MongoDB, Docker, JWT, Git. Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
+    desc: "Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
   },
   {
     period: "2026 – actualidad",
     role: "Bootcamp de Desarrollo Web Full-Stack",
     org: "The Bridge Bootcamp · Bilbao",
     color: "blue",
-    desc: "JavaScript, React, Node.js, Express, PostgreSQL, MongoDB, Docker, JWT, Git. Desarrollo de proyectos reales en equipo desde el primer día.",
+    desc:"Desarrollo de proyectos reales en equipo desde el primer día, formandonos tanto en Frontend como en Backend para poder desarrollar aplicaciones completas.",
   },
 ]
 

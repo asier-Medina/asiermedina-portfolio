@@ -6,10 +6,13 @@ import Footer from './components/Footer';
 import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import Home from "./pages/Home";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 function App() {
   const { pathname } = useLocation();
   const isLanding = pathname === '/';
+  const showScrollButton = pathname !== '/';
+
 
   return (
     <div className="app">
@@ -27,6 +30,7 @@ function App() {
       </main>
 
       {!isLanding && <Footer />}
+      {showScrollButton && <ScrollToTopButton />}
 
     </div>
   );
