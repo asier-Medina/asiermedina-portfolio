@@ -5,32 +5,39 @@ import styles from "../styles/Home.module.css"
 /* ── Timeline ── */
 const TIMELINE = [
   {
-    period: "Abr 2015 – Nov 2015",
+    period: "2015 – 2017",
     role: "Nutricionista",
     org: "Sodexo · Hospital de Górliz",
     color: "green",
     desc: "Primer contacto con entornos clínicos reales. Gestión de pacientes, trabajo con equipos multidisciplinares y toma de decisiones bajo presión.",
   },
   {
-    period: "Jul 2018 – Sep 2019",
+    period: "2018 – 2019",
     role: "Nutricionista de campo",
     org: "Ayuda en Acción · Sierra Sur de Oaxaca, México",
     color: "green",
     desc: "Trabajo en terreno con comunidades rurales en México. Coordinación de talleres, diseño de metodología junto a socios locales (EECOS-INCIDE) y adaptación constante a contextos sin recursos ni manual.",
   },
   {
-    period: "Feb 2020 – Sep 2025",
+    period: "2020 – 2025",
     role: "Gestión comercial",
     org: "Pepe Navarro S.L. · España",
-    color: "neutral",
+    color: "green",
     desc: "5 años gestionando secciones de tienda: pedidos, proveedores, inventario, facturas. Aprendí que la logística y los datos importan en cualquier sector.",
   },
+    {
+    period: "2025 – actualidad",
+    role: "Estudiante de Administración de sistemas informáticos en red",
+    org: "BirtLH · Bilbao",
+    color: "blue",
+    desc: " Node.js, Express, PostgreSQL, MongoDB, Docker, JWT, Git. Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
+  },
   {
-    period: "Feb 2026 – actualidad",
-    role: "Full-Stack Developer",
+    period: "2026 – actualidad",
+    role: "Bootcamp de Desarrollo Web Full-Stack",
     org: "The Bridge Bootcamp · Bilbao",
     color: "blue",
-    desc: "React, Node.js, Express, PostgreSQL, MongoDB, Docker, JWT, Git. Desarrollo de proyectos reales en equipo desde el primer día.",
+    desc: "JavaScript, React, Node.js, Express, PostgreSQL, MongoDB, Docker, JWT, Git. Desarrollo de proyectos reales en equipo desde el primer día.",
   },
 ]
 
@@ -77,6 +84,13 @@ const PROJECTS = [
     url: "https://github.com/asier-Medina/PROMPATON_OnZero",
     highlight: true,
   },
+   {
+    name: "Tasuku-project",
+    desc: "Web app para gestionar y repartir tareas en espacios compartidos. incorpora un sistema de gamificación con puntos que incentiva completar las tareas antes y fomenta la colaboración entre los usuarios. ",
+    stack: ["HTML", "JavaScript","CSS"],
+    url: "https://github.com/asier-Medina/tasuku-project",
+    highlight: false,
+  },
   {
     name: "POKEback",
     desc: "Sistema backend completo para gestión de equipos Pokémon: usuarios, equipos, tienda y lógica de juego con PostgreSQL.",
@@ -85,12 +99,20 @@ const PROJECTS = [
     highlight: false,
   },
   {
-    name: "GESTION-STOCK",
-    desc: "Prototipo de aplicación web para ayudar a comercios a gestionar materias primas y prever ventas.",
-    stack: ["HTML", "CSS", "JavaScript"],
-    url: "https://github.com/asier-Medina/GESTION-STOCK",
+    name: "BIDAIAgo",
+    desc: "Aplicación web orientada a la exploración de destinos de viaje accesibles e informativos.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/BidaiaGo",
     highlight: false,
   },
+    {
+    name: "Asiermedina-portfolio",
+    desc: "Lo que estas viendo ahora: un portfolio personal que rompe con el formato tradicional, diseñado para destacar soft-skills y trayectoria personal.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/asiermedina-portfolio",
+    highlight: false,
+  },
+
 ]
 
 /* ── Tech stack ── */
@@ -124,19 +146,18 @@ export default function Home() {
             en <em>ninguna casilla.</em>
           </h1>
           <p className={styles.heroBio}>
-            Soy Asier. Nutricionista de formación, con experiencia en clínica,
-            cooperación internacional y gestión comercial. Desde 2026 estudio
-            ASIR y desarrollo web full stack en The Bridge, Bilbao.
-            No cambié de manera de pensar — cambié de herramientas.
+            Soy Asier. Nutricionista de formación, con experiencia en clínica, en
+            cooperación internacional y gestión comercial. Desde 2025 estudio
+            Administración de redes en BirtLH y en 2026 inicié Desarrollo web full stack en The Bridge, Bilbao.
           </p>
           <div className={styles.heroCtas}>
             <a
-              href="https://github.com/asier-Medina"
+              href="https://www.linkedin.com/in/asiermedinalaboral/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.btnPrimary}
             >
-              Ver GitHub
+              Ver Linkedin
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
                 aria-hidden="true">
@@ -149,12 +170,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Decoración lateral */}
-        <div className={styles.heroAccent} aria-hidden="true">
-          <span className={styles.accentLine} />
-          <span className={styles.accentText}>ASIER MEDINA</span>
-          <span className={styles.accentLine} />
-        </div>
+
       </section>
 
       {/* ══ TIMELINE ══ */}
@@ -238,7 +254,7 @@ export default function Home() {
               className={`${styles.projectCard} ${p.highlight ? styles.projectHighlight : ''}`}
             >
               {p.highlight && (
-                <span className={styles.projectBadge}>Hackathon BBK</span>
+                <span className={styles.projectBadge}>Hackathon </span>
               )}
               <h3 className={styles.projectName}>{p.name}</h3>
               <p className={styles.projectDesc}>{p.desc}</p>

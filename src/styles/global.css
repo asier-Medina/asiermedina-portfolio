@@ -238,7 +238,7 @@ button { font: inherit; cursor: pointer; }
 
 .cabecera-contenedor {
   max-width: var(--max-width);
-  margin: 0 ;
+  margin: 0 auto;
   padding: 1rem var(--layout-x);
   display: flex;
   justify-content: space-between;

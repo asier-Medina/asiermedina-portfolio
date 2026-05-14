@@ -33,10 +33,6 @@ function Header() {
         >
           <Link to="/home">Conoceme</Link>
 
-          <Link to="/Projects">
-           Proyectos
-          </Link>
-
           <Link to="/contact">
             Contacto
           </Link>
