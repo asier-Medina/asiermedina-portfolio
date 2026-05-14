@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import Home from "./pages/Home";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import Projects from "./pages/Projects";
 
 function App() {
   const { pathname } = useLocation();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/"        element={<LandingPage />} />
           <Route path="/home"    element={<Home />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="*"        element={<h1>Página no encontrada</h1>} />
         </Routes>
       </main>
