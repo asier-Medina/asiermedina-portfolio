@@ -59,7 +59,7 @@ const TECH = [
 export default function Projects() {
 
   return (
-    <>
+    <div className={styles.page}>
       {/* ══ TECH STACK ══ */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
@@ -159,6 +159,6 @@ export default function Projects() {
           </svg>
         </Link>
       </section>
-    </>
+    </div>
   )
 }

@@ -228,12 +228,13 @@ button { font: inherit; cursor: pointer; }
   background: rgba(13, 18, 16, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
   border-bottom: 1px solid var(--color-border);
-
   position: sticky;
   top: 0;
   z-index: 50;
+  /* Necesario para que nav-central.activo (position:absolute)
+     se posicione relativo al header y no al viewport */
+  isolation: isolate;
 }
 
 .cabecera-contenedor {
@@ -332,15 +333,8 @@ button { font: inherit; cursor: pointer; }
 .menu-overlay {
   position: fixed;
   inset: 0;
-
   background: rgba(0, 0, 0, 0.45);
-
-  z-index: 80;
-}
-
-
-.nav-central.activo {
-  z-index: 50;
+  z-index: 40;  /* por debajo del header sticky (50) */
 }
 
 /* ========================================
@@ -627,10 +621,10 @@ button { font: inherit; cursor: pointer; }
     gap: 0.5rem;
     border-top: 1px solid var(--color-border);
     box-shadow: var(--shadow-medium);
-    z-index: 999;
+    /* Dentro del stacking context del header (isolation:isolate)
+       este z-index es relativo al header, no al documento */
+    z-index: 1;
   }
-
-  .cabecera { position: relative; }
 }
 
 /* ========================================

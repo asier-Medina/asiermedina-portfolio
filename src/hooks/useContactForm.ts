@@ -1,12 +1,17 @@
 import { useState } from "react";
 import type { ChangeEvent, SyntheticEvent } from "react";
+import emailjs from "@emailjs/browser";
 
 import type {
   ContactFormData,
   FormErrors,
-  StoredMessage,
 } from "../models/ContactModel";
 
+// ── Credenciales EmailJS ──────────────────────────────
+const EMAILJS_SERVICE_ID  = "service_v27c9nb";
+const EMAILJS_TEMPLATE_ID = "template_f5klbce";
+const EMAILJS_PUBLIC_KEY  = "n6CtsP6MMc4qEPlA6";
+// ─────────────────────────────────────────────────────
 
 export function useContactForm() {
 
@@ -17,24 +22,22 @@ export function useContactForm() {
     message: "",
   });
 
-  const [errors, setErrors] = useState<FormErrors>({});
-
+  const [errors, setErrors]         = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess]       = useState(false);
+  const [sendError, setSendError]   = useState<string | null>(null);
 
-  const [success, setSuccess] = useState(false);
-
+  // ── Validación — sin cambios ──────────────────────
   const validate = (): FormErrors => {
     const newErrors: FormErrors = {};
-
-    if (!formData.name.trim()) newErrors.name = "Nombre obligatorio";
+    if (!formData.name.trim())    newErrors.name    = "Nombre obligatorio";
     if (!formData.email.trim()) {
       newErrors.email = "Email obligatorio";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Formato inválido";
     }
-    if (!formData.reason.trim()) newErrors.reason = "Motivo obligatorio";
-    if (!formData.message.trim()) newErrors.message = "Mensaje obligatorio";
-
+    if (!formData.reason.trim())   newErrors.reason  = "Motivo obligatorio";
+    if (!formData.message.trim())  newErrors.message = "Mensaje obligatorio";
     return newErrors;
   };
 
@@ -43,37 +46,20 @@ export function useContactForm() {
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
+    setSendError(null);
   };
 
   const resetForm = () => {
-    setFormData({
-      name: "",
-      email: "",
-      reason: "",
-      message: "",
-    });
+    setFormData({ name: "", email: "", reason: "", message: "" });
     setErrors({});
     setSuccess(false);
+    setSendError(null);
   };
 
-  const saveToLocalStorage = (data: ContactFormData) => {
-
-    const newMessage: StoredMessage = {
-      ...data,
-      id: Date.now().toString(),
-      date: new Date().toISOString()
-    };
-
-    const stored = localStorage.getItem("bidaiaGoMessages");
-    const messagesArray = stored ? JSON.parse(stored) : [];
-
-    messagesArray.push(newMessage);
-
-    localStorage.setItem("bidaiaGoMessages", JSON.stringify(messagesArray));
-  };
-
-const handleSubmit = (e: SyntheticEvent) => {
+  // ── Submit — ahora con EmailJS ────────────────────
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -81,12 +67,31 @@ const handleSubmit = (e: SyntheticEvent) => {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      saveToLocalStorage(formData);
-      resetForm();
+    setSendError(null);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  formData.name,
+          from_email: formData.email,
+          subject:    formData.reason,
+          message:    formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
       setSuccess(true);
+      setFormData({ name: "", email: "", reason: "", message: "" });
+      setErrors({});
+
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setSendError("No se pudo enviar el mensaje. Inténtalo de nuevo.");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
 
   return {
@@ -94,8 +99,9 @@ const handleSubmit = (e: SyntheticEvent) => {
     errors,
     isSubmitting,
     success,
+    sendError,
     handleChange,
     resetForm,
-    handleSubmit
+    handleSubmit,
   };
 }

@@ -6,33 +6,35 @@ import Footer from './components/Footer';
 import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import Home from "./pages/Home";
-import ScrollToTopButton from "./components/ScrollToTopButton";
 import Projects from "./pages/Projects";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const { pathname } = useLocation();
   const isLanding = pathname === '/';
-  const showScrollButton = pathname !== '/';
-
 
   return (
     <div className="app">
 
-      {/* Header y Footer solo en páginas interiores */}
+      {/* Vuelve al inicio en cada cambio de ruta — sin esto
+          React Router mantiene la posición de scroll anterior */}
+      <ScrollToTop />
+
       {!isLanding && <Header />}
 
       <main className={isLanding ? '' : 'contenido'}>
         <Routes>
-          <Route path="/"        element={<LandingPage />} />
-          <Route path="/home"    element={<Home />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/"         element={<LandingPage />} />
+          <Route path="/home"     element={<Home />} />
+          <Route path="/contact"  element={<ContactPage />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="*"        element={<h1>Página no encontrada</h1>} />
+          <Route path="*"         element={<h1>Página no encontrada</h1>} />
         </Routes>
       </main>
 
       {!isLanding && <Footer />}
-      {showScrollButton && <ScrollToTopButton />}
+      {!isLanding && <ScrollToTopButton />}
 
     </div>
   );
