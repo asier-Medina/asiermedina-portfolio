@@ -1,3 +1,100 @@
+===== ./DOCS/resumen.md =====
+11.05
+Se hace la estructura de carpetas siguiendo el modelo MVC para tener el trabajo estructurado y facilitar la escalabilidad
+12.05
+Se utiliza como plantilla la pagina de contacto y el header de el anterior proyecto de React para acelerar el proyecto y tener una estructura con la que ir trabajando en la rama feat/contact , tambien se incluye un css comun a todo el proyecto que se podráir modificando a medida que se avance 
+Se añade funcionalidad a los iconos de redes sociales y github 
+13.05
+Se desarrolla la parte del landing, con una breve descripción personal y una seríe de slides de imagenes y texto para dar dinamismo a la landing 
+14.05
+
+
+
+
+-----------------------
+===== ./eslint.config.js =====
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+])
+
+-----------------------
+===== ./index.html =====
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>asiermedina-portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+-----------------------
+===== ./package.json =====
+{
+  "name": "asiermedina-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@eslint/js": "^10.0.1",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12"
+  }
+}
+
+-----------------------
+===== ./package-lock.json =====
 {
   "name": "asiermedina-portfolio",
   "version": "0.0.0",
@@ -8,7 +105,6 @@
       "name": "asiermedina-portfolio",
       "version": "0.0.0",
       "dependencies": {
-        "@emailjs/browser": "^4.4.1",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
         "react-router-dom": "^7.15.0"
@@ -271,15 +367,6 @@
       },
       "engines": {
         "node": ">=6.9.0"
-      }
-    },
-    "node_modules/@emailjs/browser": {
-      "version": "4.4.1",
-      "resolved": "https://registry.npmjs.org/@emailjs/browser/-/browser-4.4.1.tgz",
-      "integrity": "sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==",
-      "license": "BSD-3-Clause",
-      "engines": {
-        "node": ">=14.0.0"
       }
     },
     "node_modules/@emnapi/core": {
@@ -2929,3 +3016,3327 @@
     }
   }
 }
+
+-----------------------
+===== ./README.md =====
+# Asier Medina Portfolio
+
+Modern personal portfolio and CV website built with React.
+
+## 📌 Overview
+
+This project is a personal developer portfolio created to showcase:
+
+* Projects
+* Technical skills
+* Experience
+* Contact information
+* Professional profile
+
+The objective is to build a clean and modern frontend application focused on presentation, usability and responsive design.
+
+---
+
+## 🚀 Technologies
+
+Current stack:
+
+* React
+* Vite
+* JavaScript / TypeScript
+* HTML5
+* CSS3
+* Git & GitHub
+
+Future improvements may include:
+
+* React Router
+* TailwindCSS
+* Framer Motion
+* Dark mode
+* Internationalization (i18n)
+* PDF CV download
+* Deploy with custom domain
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+ ├── assets/
+ ├── components/
+ ├── pages/
+ ├── styles/
+ ├── App.jsx
+ └── main.jsx
+```
+
+---
+
+## 🛠️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-user/asiermedina-portfolio.git
+```
+
+Enter the project folder:
+
+```bash
+cd asiermedina-portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🎯 Project Goals
+
+* Create a professional online presence
+* Improve React and frontend skills
+* Showcase personal and academic projects
+* Build a portfolio ready for job applications
+* Deploy the project under a personal domain
+
+---
+
+## 📱 Features Planned
+
+* Responsive layout
+* Projects section
+* Skills section
+* About me page
+* Download CV button
+* Contact section
+* Animations and transitions
+* Theme switcher
+
+---
+
+## 🌐 Deployment
+
+Deployment will be configured in future versions.
+
+Possible platforms:
+
+* Vercel
+* Netlify
+* Cloudflare Pages
+
+Custom domain support planned.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+Asier Medina
+Frontend Developer Student
+Bilbao, Basque Country
+
+
+-----------------------
+===== ./src/App.tsx =====
+import "./styles/variables.css";
+import "./styles/global.css";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import LandingPage from "./pages/LandingPage";
+import ContactPage from "./pages/ContactPage";
+import Home from "./pages/Home";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+
+function App() {
+  const { pathname } = useLocation();
+  const isLanding = pathname === '/';
+  const showScrollButton = pathname !== '/';
+
+
+  return (
+    <div className="app">
+
+      {/* Header y Footer solo en páginas interiores */}
+      {!isLanding && <Header />}
+
+      <main className={isLanding ? '' : 'contenido'}>
+        <Routes>
+          <Route path="/"        element={<LandingPage />} />
+          <Route path="/home"    element={<Home />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*"        element={<h1>Página no encontrada</h1>} />
+        </Routes>
+      </main>
+
+      {!isLanding && <Footer />}
+      {showScrollButton && <ScrollToTopButton />}
+
+    </div>
+  );
+}
+
+export default App;
+-----------------------
+===== ./src/components/ContactForm.tsx =====
+import { useContactForm } from "../hooks/useContactForm";
+
+export default function ContactForm() {
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    success,
+    handleChange,
+    handleSubmit
+  } = useContactForm();
+
+  return (
+    <div className="contact-form">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Nombre</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Tu nombre"
+          />
+          {errors.name && <span className="error-message">{errors.name}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="tu@email.com"
+          />
+          {errors.email && <span className="error-message">{errors.email}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Rol</label>
+          <select name="reason" value={formData.reason} onChange={handleChange}>
+            <option value="">Selecciona un rol</option>
+            <option value="consulta">Particular</option>
+            <option value="dudas">Empresa</option>
+            <option value="otro">Otro</option>
+          </select>
+          {errors.reason && <span className="error-message">{errors.reason}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Mensaje</label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Cuéntame en qué puedo ayudar..."
+            rows={5}
+          />
+          {errors.message && <span className="error-message">{errors.message}</span>}
+        </div>
+
+        <button type="submit" className="submit-btn" disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+        </button>
+
+        {success && (
+          <p className="success-message">
+            ¡Mensaje enviado correctamente!
+          </p>
+        )}
+      </form>
+    </div>
+  );
+}
+-----------------------
+===== ./src/components/Footer.tsx =====
+function Footer() {
+  return (
+    <footer className="pie">
+      <div className="pie-contenedor">
+        <p>© 2026 Mi Portfolio</p>
+        <p>Contacto: asiermedinalaboral@gmail.com</p>
+      </div>
+    </footer>
+  );
+}
+export default Footer;
+-----------------------
+===== ./src/components/Header.tsx =====
+import { useEffect, useState } from "react";
+
+import { Link, useLocation } from "react-router-dom";
+
+import logo from "../assets/logo.png";
+
+function Header() {
+  const [open, setOpen] = useState(false);
+
+  const location = useLocation();
+
+  // Cierra automáticamente al cambiar de página
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  // Bloquea scroll cuando menú abierto
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <>
+      <header className="cabecera">
+        <div className="cabecera-contenedor">
+
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className="logo"
+          >
+            <img
+              className="imgLogo"
+              src={logo}
+              alt="Volver al inicio"
+            />
+          </Link>
+
+          <nav
+            id="main-navigation"
+            className={`nav-central ${open ? "activo" : ""}`}
+          >
+            <Link
+              to="/home"
+              onClick={() => setOpen(false)}
+            >
+              Conóceme
+            </Link>
+
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Contacto
+            </Link>
+          </nav>
+
+          <button
+            className="boton-hamburguesa"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={open}
+            aria-controls="main-navigation"
+          >
+            ☰
+          </button>
+
+        </div>
+      </header>
+
+      {/* Overlay */}
+      {open && (
+        <div
+          className="menu-overlay"
+          onClick={() => setOpen(false)}
+        />
+      )}
+    </>
+  );
+}
+
+export default Header;
+-----------------------
+===== ./src/components/ScrollToTopButton.tsx =====
+import { useState, useEffect } from 'react';
+
+
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleClick = () => {
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  };
+
+  return (
+    <button
+      type="button"
+      className={`home-scroll-top${visible ? ' home-scroll-top-visible' : ''}`}
+      onClick={handleClick}
+      aria-label="Volver arriba"
+      tabIndex={visible ? 0 : -1}
+    >
+      <svg
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+  );
+}
+
+export default ScrollToTopButton;
+
+-----------------------
+===== ./src/hooks/useContactForm.ts =====
+import { useState } from "react";
+import type { ChangeEvent, SyntheticEvent } from "react";
+
+import type {
+  ContactFormData,
+  FormErrors,
+  StoredMessage,
+} from "../models/ContactModel";
+
+
+export function useContactForm() {
+
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    email: "",
+    reason: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [success, setSuccess] = useState(false);
+
+  const validate = (): FormErrors => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) newErrors.name = "Nombre obligatorio";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email obligatorio";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Formato inválido";
+    }
+    if (!formData.reason.trim()) newErrors.reason = "Motivo obligatorio";
+    if (!formData.message.trim()) newErrors.message = "Mensaje obligatorio";
+
+    return newErrors;
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      reason: "",
+      message: "",
+    });
+    setErrors({});
+    setSuccess(false);
+  };
+
+  const saveToLocalStorage = (data: ContactFormData) => {
+
+    const newMessage: StoredMessage = {
+      ...data,
+      id: Date.now().toString(),
+      date: new Date().toISOString()
+    };
+
+    const stored = localStorage.getItem("bidaiaGoMessages");
+    const messagesArray = stored ? JSON.parse(stored) : [];
+
+    messagesArray.push(newMessage);
+
+    localStorage.setItem("bidaiaGoMessages", JSON.stringify(messagesArray));
+  };
+
+const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setTimeout(() => {
+      saveToLocalStorage(formData);
+      resetForm();
+      setSuccess(true);
+      setIsSubmitting(false);
+    }, 500);
+  };
+
+  return {
+    formData,
+    errors,
+    isSubmitting,
+    success,
+    handleChange,
+    resetForm,
+    handleSubmit
+  };
+}
+-----------------------
+===== ./src/main.tsx =====
+
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+import "./styles/variables.css";
+import "./styles/global.css";
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
+-----------------------
+===== ./src/models/ContactModel.ts =====
+export interface ContactFormData {
+  name: string;
+  email: string;
+  reason: string;
+  message: string;
+}
+
+export interface TeamMember {
+  id: number;
+  name: string;
+  role?: string;
+  description?: string;
+  githubUrl?: string;
+}
+
+export type FormErrors = {
+  name?: string;
+  email?: string;
+  reason?: string;
+  message?: string;
+};
+
+// Para el historial de mensajes
+export interface StoredMessage extends ContactFormData {
+  id: string; 
+  date: string;
+}
+
+-----------------------
+===== ./src/pages/ContactPage.tsx =====
+import ContactForm from "../components/ContactForm";
+import "../styles/ContactPage.css";
+
+export default function ContactPage() {
+  return (
+    <section className="section">
+      <div className="contact-content">
+        <div className="contact-header">
+          <h2>¿Quieres Saber Más?</h2>
+          <p>No dudes en contactarme...</p>
+        </div>
+
+        <div className="contact-container">
+          <div className="contact-info-section">
+            <h3>Contacto</h3>
+            <p>Si tienes alguna pregunta o necesitas más información, no dudes en hacermelo saber a traves de las siguientes direcciones o rellenando el formulario</p>
+
+            <div className="contact-details">
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
+                </div>
+                <div className="contact-text">
+                  <h4>Email</h4>
+                  <p>asiermedinalaboral@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  </svg>
+                </div>
+                <div className="contact-text">
+                  <h4>Teléfono</h4>
+                  <p>+34 655732425</p>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                  </svg>
+                </div>
+                <div className="contact-text">
+                  <h4>Dirección</h4>
+                  <p>Bilbao, Bizkaia</p>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                  </svg>
+                </div>
+                <div className="contact-text">
+                  <h4>Disponibilidad</h4>
+                  <p>Busqueda Activa de Empleo</p>
+                </div>
+              </div>
+            </div>
+            </div>
+          <div className="contact-form-section">
+            <ContactForm />
+            </div>
+                        <div className="social-links">
+  <h4>Sígueme</h4>
+
+  <div className="social-buttons">
+
+    <a
+      href="https://www.linkedin.com/in/asiermedinalaboral/"
+      className="social-btn"
+      title="LinkedIn"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      </svg>
+    </a>
+
+    <a
+      href="https://github.com/asier-Medina"
+      className="social-btn"
+      title="Github"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+      </svg>
+    </a>
+
+    <a
+      href="https://www.instagram.com/asier.___/"
+      className="social-btn"
+      title="Instagram"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+      </svg>
+    </a>
+
+  </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  );
+} 
+-----------------------
+===== ./src/pages/Home.tsx =====
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import styles from "../styles/Home.module.css"
+
+/* ── Timeline ── */
+const TIMELINE = [
+  {
+    period: "2015 – 2017",
+    role: "Nutricionista",
+    org: "Sodexo · Hospital de Górliz",
+    color: "green",
+    desc: "Primer contacto con entornos clínicos reales. Gestión de pacientes, trabajo con equipos multidisciplinares y toma de decisiones bajo presión.",
+  },
+  {
+    period: "2018 – 2019",
+    role: "Nutricionista de campo",
+    org: "Ayuda en Acción · Sierra Sur de Oaxaca, México",
+    color: "green",
+    desc: "Trabajo en terreno con comunidades rurales en México. Coordinación de talleres, diseño de metodología junto a socios locales (EECOS-INCIDE) y adaptación constante a contextos sin recursos ni manual.",
+  },
+  {
+    period: "2020 – 2025",
+    role: "Gestión comercial",
+    org: "Pepe Navarro S.L. · España",
+    color: "green",
+    desc: "5 años gestionando secciones de tienda: pedidos, proveedores, inventario, facturas. Aprendí que la logística y los datos importan en cualquier sector.",
+  },
+    {
+    period: "2025 – actualidad",
+    role: "Estudiante de Administración de sistemas informáticos en red",
+    org: "BirtLH · Bilbao",
+    color: "blue",
+    desc: "Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
+  },
+  {
+    period: "2026 – actualidad",
+    role: "Bootcamp de Desarrollo Web Full-Stack",
+    org: "The Bridge Bootcamp · Bilbao",
+    color: "blue",
+    desc:"Desarrollo de proyectos reales en equipo desde el primer día, formandonos tanto en Frontend como en Backend para poder desarrollar aplicaciones completas.",
+  },
+]
+
+/* ── Soft skills ── */
+const SKILLS = [
+  {
+    icon: "🧩",
+    title: "Adaptabilidad extrema",
+    desc: "De una consulta clínica a un campo en México, de ahí a una tienda, y ahora al código. Cada entorno ha sido un idioma nuevo que aprendí desde cero.",
+  },
+  {
+    icon: "🔍",
+    title: "Diagnóstico y análisis",
+    desc: "Años escuchando síntomas que no encajaban me enseñaron a buscar la causa raíz, no el síntoma. Lo mismo hago con un bug o un requisito mal definido.",
+  },
+  {
+    icon: "🤝",
+    title: "Empatía funcional",
+    desc: "Trabajo con pacientes, con comunidades rurales, con clientes de tienda. Sé leer a las personas antes de abrirles la boca. Eso se lleva al equipo de desarrollo.",
+  },
+  {
+    icon: "🌍",
+    title: "Inteligencia intercultural",
+    desc: "Coordiné proyectos en contextos donde el idioma, la cultura y los recursos eran completamente diferentes a los míos. La comunicación no siempre es verbal.",
+  },
+  {
+    icon: "🔁",
+    title: "Aprendizaje continuo",
+    desc: "No esperé a tener el perfil perfecto para cambiar. Empecé, me equivoqué, corregí. El ciclo prueba-error es el mismo en nutrición que en desarrollo.",
+  },
+  {
+    icon: "📦",
+    title: "Gestión bajo presión",
+    desc: "Inventario roto un viernes por la tarde, paciente en urgencias, taller sin materiales. La presión no me paraliza, me organiza.",
+  },
+]
+
+/* ── Proyectos ── */
+const PROJECTS = [
+  {
+    name: "ONzero",
+    desc: "App anti-desperdicio alimentario creada durante el Prompt-a-thon de BBK + The Bridge. Los usuarios introducen lo que tienen en casa y la app sugiere recetas.",
+    stack: ["JavaScript", "React", "Node.js"],
+    url: "https://github.com/asier-Medina/PROMPATON_OnZero",
+    highlight: true,
+  },
+   {
+    name: "Tasuku-project",
+    desc: "Web app para gestionar y repartir tareas en espacios compartidos. incorpora un sistema de gamificación con puntos que incentiva completar las tareas antes y fomenta la colaboración entre los usuarios. ",
+    stack: ["HTML", "JavaScript","CSS"],
+    url: "https://github.com/asier-Medina/tasuku-project",
+    highlight: false,
+  },
+  {
+    name: "POKEback",
+    desc: "Sistema backend completo para gestión de equipos Pokémon: usuarios, equipos, tienda y lógica de juego con PostgreSQL.",
+    stack: ["JavaScript", "PostgreSQL", "Express"],
+    url: "https://github.com/asier-Medina/POKEback",
+    highlight: false,
+  },
+  {
+    name: "BIDAIAgo",
+    desc: "Aplicación web orientada a la exploración de destinos de viaje accesibles e informativos.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/BidaiaGo",
+    highlight: false,
+  },
+    {
+    name: "Asiermedina-portfolio",
+    desc: "Lo que estas viendo ahora: un portfolio personal que rompe con el formato tradicional, diseñado para destacar soft-skills y trayectoria personal.",
+    stack: ["HTML", "CSS", "React", "TypeScript"],
+    url: "https://github.com/asier-Medina/asiermedina-portfolio",
+    highlight: false,
+  },
+
+]
+
+/* ── Tech stack ── */
+const TECH = [
+  { label: "React",       color: "blue" },
+  { label: "Node.js",     color: "green" },
+  { label: "Express",     color: "blue" },
+  { label: "PostgreSQL",  color: "blue" },
+  { label: "MongoDB",     color: "green" },
+  { label: "Docker",      color: "blue" },
+  { label: "Git / GitHub",color: "green" },
+  { label: "JWT",         color: "blue" },
+  { label: "REST APIs",   color: "blue" },
+  { label: "TypeScript",  color: "blue" },
+  { label: "ASIR",        color: "green" },
+  { label: "Redes",       color: "green" },
+]
+
+export default function Home() {
+  const [activeSkill, setActiveSkill] = useState<number | null>(null)
+
+  return (
+    <div className={styles.page}>
+
+      {/* ══ HERO / INTRO ══ */}
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <p className={styles.eyebrow}>Sobre mí</p>
+          <h1 className={styles.heroTitle}>
+            Un perfil que no cabe<br />
+            en <em>ninguna casilla.</em>
+          </h1>
+          <p className={styles.heroBio}>
+            Soy Asier. Nutricionista de formación, con experiencia en clínica, en
+            cooperación internacional y gestión comercial. Desde 2025 estudio
+            Administración de redes en BirtLH y en 2026 inicié Desarrollo web full stack en The Bridge, Bilbao.
+          </p>
+          <div className={styles.heroCtas}>
+            <a
+              href="https://www.linkedin.com/in/asiermedinalaboral/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnPrimary}
+            >
+              Ver Linkedin
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+                aria-hidden="true">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+              </svg>
+            </a>
+            <Link to="/contact" className={styles.btnSecondary}>
+              Contacto
+            </Link>
+          </div>
+        </div>
+
+
+      </section>
+
+      {/* ══ TIMELINE ══ */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Trayectoria</p>
+          <h2 className={styles.sectionTitle}>El camino hasta aquí</h2>
+        </div>
+
+        <div className={styles.timeline}>
+          {TIMELINE.map((item, i) => (
+            <div key={i} className={`${styles.timelineItem} ${styles[`tl${item.color}`]}`}>
+              <div className={styles.tlDot} />
+              <div className={styles.tlBody}>
+                <span className={styles.tlPeriod}>{item.period}</span>
+                <h3 className={styles.tlRole}>{item.role}</h3>
+                <p className={styles.tlOrg}>{item.org}</p>
+                <p className={styles.tlDesc}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ SOFT SKILLS ══ */}
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Lo que no aparece en un CV</p>
+          <h2 className={styles.sectionTitle}>Soft skills</h2>
+        </div>
+
+        <div className={styles.skillsGrid}>
+          {SKILLS.map((sk, i) => (
+            <div
+              key={i}
+              className={`${styles.skillCard} ${activeSkill === i ? styles.skillActive : ''}`}
+              onMouseEnter={() => setActiveSkill(i)}
+              onMouseLeave={() => setActiveSkill(null)}
+            >
+              <span className={styles.skillIcon}>{sk.icon}</span>
+              <h3 className={styles.skillTitle}>{sk.title}</h3>
+              <p className={styles.skillDesc}>{sk.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ TECH STACK ══ */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Herramientas actuales</p>
+          <h2 className={styles.sectionTitle}>Stack técnico</h2>
+        </div>
+
+        <div className={styles.techGrid}>
+          {TECH.map((t, i) => (
+            <span
+              key={i}
+              className={`${styles.techTag} ${t.color === 'green' ? styles.techGreen : styles.techBlue}`}
+            >
+              {t.label}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ PROYECTOS ══ */}
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className={styles.sectionHeader}>
+          <p className={styles.sectionLabel}>Código real</p>
+          <h2 className={styles.sectionTitle}>Proyectos</h2>
+        </div>
+
+        <div className={styles.projectsGrid}>
+          {PROJECTS.map((p, i) => (
+            <a
+              key={i}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.projectCard} ${p.highlight ? styles.projectHighlight : ''}`}
+            >
+              {p.highlight && (
+                <span className={styles.projectBadge}>Hackathon </span>
+              )}
+              <h3 className={styles.projectName}>{p.name}</h3>
+              <p className={styles.projectDesc}>{p.desc}</p>
+              <div className={styles.projectStack}>
+                {p.stack.map(s => (
+                  <span key={s} className={styles.projectTag}>{s}</span>
+                ))}
+              </div>
+              <span className={styles.projectLink}>
+                Ver en GitHub →
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ══ CTA FINAL ══ */}
+      <section className={styles.ctaSection}>
+        <h2 className={styles.ctaTitle}>¿Hablamos?</h2>
+        <p className={styles.ctaText}>
+          Estoy buscando mi primer rol en tech. Si crees que este perfil encaja
+          en tu equipo, me alegra escucharte.
+        </p>
+        <Link to="/contact" className={styles.btnPrimary}>
+          Escríbeme
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
+            aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </section>
+
+    </div>
+  )
+}
+
+-----------------------
+===== ./src/pages/LandingPage.tsx =====
+import { useState, useEffect, useRef, useCallback} from 'react'
+import { Link } from "react-router-dom"
+import Header from "../components/Header"
+import styles from "../styles/LandingPage.module.css"
+
+const SLIDES = [
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1800&q=80',
+  'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1800&q=80',
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1800&q=80',
+]
+
+const PHRASES = [
+  'El diagnóstico es el mismo: Entender cómo.',
+  'Cambié de idioma, no de manera de pensar.',
+  'Mismo método: Prueba y Error.',
+]
+
+export default function LandingPage() {
+  const [current, setCurrent]             = useState(0)
+  const [phraseIdx, setPhraseIdx]         = useState(0)
+  const [phraseVisible, setPhraseVisible] = useState(true)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const phraseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+    }
+
+    timerRef.current = setInterval(() => {
+      setCurrent(c => (c + 1) % SLIDES.length)
+    }, 4800)
+
+  }, [])
+
+  useEffect(() => {
+    startTimer()
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [startTimer])
+
+  useEffect(() => {
+  const id = setInterval(() => {
+    setPhraseVisible(false)
+
+    phraseTimeoutRef.current = setTimeout(() => {
+      setPhraseIdx(i => (i + 1) % PHRASES.length)
+      setPhraseVisible(true)
+    }, 380)
+
+  }, 3800)
+
+  return () => {
+    clearInterval(id)
+
+    if (phraseTimeoutRef.current) {
+      clearTimeout(phraseTimeoutRef.current)
+    }
+  }
+}, [])
+
+  return (
+    <div className={styles.root}>
+
+      {/* Header flotante sobre los slides */}
+      <div className={styles.headerWrap}>
+        <Header />
+      </div>
+
+      {/* Slides */}
+      <div className={styles.slides} aria-hidden="true">
+        {SLIDES.map((src, i) => (
+          <div
+            key={src}
+            className={`${styles.slide} ${i === current ? styles.active : ''}`}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
+      </div>
+
+      {/* Grain */}
+      <div className={styles.grain} aria-hidden="true" />
+
+      {/* Contenido principal */}
+      <main className={styles.content}>
+
+        <h1 className={styles.headline}>
+          No cambié de rumbo.<br />
+          Cambié de <em className={styles.pivot}>herramientas.</em>
+        </h1>
+
+        <div className={styles.rotatorWrap} aria-live="polite">
+          <p className={`${styles.phrase} ${phraseVisible ? styles.phraseIn : styles.phraseOut}`}>
+            {PHRASES[phraseIdx]}
+          </p>
+        </div>
+
+        <p className={styles.bio}>
+          Soy Nutricionista con años de práctica clínica y un giro
+          deliberado hacia la tecnología. Hoy estudio{' '}
+          <strong>ASIR</strong> y desarrollo web full stack en{' '}
+          <strong>The Bridge</strong>, construyendo un perfil difícil
+          de definir en un currículum estándar.
+        </p>
+
+        <div className={styles.badges}>
+          <span className={`${styles.badge} ${styles.badgeGreen}`}>Nutrición clínica</span>
+          <span className={`${styles.badge} ${styles.badgeBlue}`}>ASIR · Redes</span>
+          <span className={`${styles.badge} ${styles.badgeBlue}`}>Full Stack · The Bridge</span>
+        </div>
+
+        <div className={styles.cta}>
+          <Link to="/home" className={styles.btn}>
+            <span>Conóceme</span>
+            <svg viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth={2.2}
+              strokeLinecap="round" strokeLinejoin="round"
+              aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
+      </main>
+
+      {/* Dots */}
+      <div className={styles.dots}>
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
+            onClick={() => { setCurrent(i); startTimer() }}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+   
+
+    </div>
+  )
+}
+-----------------------
+===== ./src/styles/ContactPage.css =====
+/* =====================================================
+   PORTFOLIO — CONTACT PAGE
+   Usa las variables de variables.css
+   ===================================================== */
+
+/* ========================================
+   SECCIÓN CONTENEDOR
+   ======================================== */
+
+.contact-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ========================================
+   ENCABEZADO
+   ======================================== */
+
+.contact-header {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.contact-header h2 {
+  font-size: var(--font-size-3xl);
+  font-family: var(--font-heading);
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-header p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   GRID PRINCIPAL
+   ======================================== */
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+/* ========================================
+   COLUMNA DE INFORMACIÓN
+   ======================================== */
+
+.contact-info-section {
+  padding-right: var(--spacing-md);
+}
+
+.contact-info-section h3 {
+  font-size: var(--font-size-2xl);
+  font-family: var(--font-heading);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+.contact-info-section p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ========================================
+   ITEMS DE CONTACTO
+   ======================================== */
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  transition: transform var(--transition-default),
+              border-color var(--transition-default),
+              box-shadow var(--transition-default),
+              background var(--transition-default);
+}
+
+.contact-item:hover {
+  background: var(--color-surface-alt);
+  transform: translateX(5px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--color-bg);
+}
+
+.contact-text { flex: 1; }
+
+.contact-text h4 {
+  font-size: var(--font-size-base);
+  font-family: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.contact-text p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ========================================
+   REDES SOCIALES
+   ======================================== */
+
+.social-links {
+  margin-top: var(--spacing-md);
+}
+
+.social-links h4 {
+  font-size: var(--font-size-md);
+  font-family: var(--font-base);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+.social-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-default),
+              border-color var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.social-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--color-text-secondary);
+  transition: fill var(--transition-default);
+}
+
+.social-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+}
+
+.social-btn:hover svg {
+  fill: var(--color-bg);
+}
+
+/* ========================================
+   FORMULARIO
+   ======================================== */
+
+.contact-form-section {
+  padding-left: var(--spacing-md);
+}
+
+.contact-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-md);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-family: var(--font-base);
+  transition: border-color var(--transition-default),
+              background var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: var(--color-surface-alt);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   BOTÓN ENVIAR
+   ======================================== */
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  padding: 0.9rem var(--spacing-md);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  color: var(--color-bg);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  font-family: var(--font-base);
+  cursor: pointer;
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default),
+              opacity var(--transition-default);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  opacity: 0.92;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .contact-content {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-header {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .contact-header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .contact-header p {
+    font-size: var(--font-size-base);
+    padding: 0 var(--spacing-xs);
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .contact-info-section {
+    padding-right: 0;
+  }
+
+  .contact-form-section {
+    padding-left: 0;
+  }
+
+  .contact-info-section h3 {
+    font-size: var(--font-size-xl);
+    text-align: center;
+  }
+
+  .contact-info-section > p {
+    text-align: center;
+    padding: 0 var(--spacing-xs);
+  }
+
+  .contact-details { gap: 0.75rem; }
+
+  .contact-item { padding: 1rem; }
+
+  .contact-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-text h4 { font-size: var(--font-size-sm); }
+  .contact-text p  { font-size: var(--font-size-xs); }
+
+  .social-links { text-align: center; }
+  .social-buttons { justify-content: center; }
+
+  .contact-form { padding: var(--spacing-sm); }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.75rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .submit-btn {
+    padding: 0.85rem var(--spacing-sm);
+    font-size: var(--font-size-base);
+  }
+}
+
+-----------------------
+===== ./src/styles/global.css =====
+/* =====================================================
+   PORTFOLIO — ESTILOS GLOBALES
+   Importa siempre después de variables.css
+   ===================================================== */
+
+/* ========================================
+   RESET
+   ======================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   BASE
+   ======================================== */
+
+body {
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ========================================
+   TIPOGRAFÍA
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+/* Gradiente de acento para títulos destacados */
+.heading-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+p { line-height: 1.7; }
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* ========================================
+   ENLACES
+   ======================================== */
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.nav a {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+
+  color: var(--color-text-secondary);
+
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-accent);
+}
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-small);
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 0.7rem 1.2rem;
+  z-index: 200;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-small) 0;
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus { top: 0; }
+
+/* ========================================
+   TARJETAS (card)
+   ======================================== */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-md);
+  transition: transform var(--transition-default),
+              border-color var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-medium);
+}
+
+/* ========================================
+   BOTONES
+   ======================================== */
+
+button { font: inherit; cursor: pointer; }
+
+/* Botón primario — acento nutrición (verde) */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: background var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.button-primary:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-green);
+}
+
+/* Botón secundario — acento tech (azul) */
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-tech);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-tech);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  transition: background var(--transition-default),
+              color var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.button-secondary:hover {
+  background: var(--color-tech-subtle);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+/* Botón degradado (CTA principal) */
+.button-gradient {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  color: var(--color-bg);
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default),
+              opacity var(--transition-default);
+}
+
+.button-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  opacity: 0.92;
+}
+
+/* ========================================
+   CABECERA / HEADER
+   ======================================== */
+
+.cabecera {
+  background: rgba(13, 18, 16, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid var(--color-border);
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.cabecera-contenedor {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem var(--layout-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 72px;
+}
+
+.imgLogo {
+  max-width: 85px;
+  width: 100%;
+  height: auto;
+}
+
+/* .nav en global.css = nav de la cabecera fija del sitio */
+.nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-central {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+
+  padding-bottom: 0.3rem;
+
+  border-bottom: 2px solid transparent;
+
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+
+  border-bottom-color: var(--color-accent);
+}
+.hero {
+  padding-top: 4rem;
+}
+.hero-content {
+  padding-top: 3rem;
+}
+
+/* ========================================
+   BOTÓN HAMBURGUESA
+   ======================================== */
+
+.boton-hamburguesa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+.boton-hamburguesa:hover {
+  background: var(--color-surface);
+  border-color: var(--color-border-dark);
+}
+
+.hamburguesa-icono {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburguesa-icono span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+}
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  z-index: 80;
+}
+
+
+.nav-central.activo {
+  z-index: 50;
+}
+
+/* ========================================
+   MENÚ LATERAL (móvil)
+   ======================================== */
+
+.menu-lateral-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-default);
+}
+
+.menu-lateral-overlay.abierto {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  max-width: 80vw;
+  height: 100vh;
+  background: var(--color-surface);
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform var(--transition-default);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-large);
+}
+
+.menu-lateral.abierto { transform: translateX(0); }
+
+.menu-lateral-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-lateral-cabecera span {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.boton-cerrar-menu {
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-small);
+  transition: background var(--transition-fast);
+}
+
+.boton-cerrar-menu:hover { background: var(--color-surface-alt); }
+
+.menu-lateral nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.menu-lateral nav a {
+  display: block;
+  padding: 1rem 1.25rem;
+  min-height: var(--tamano-toque-min);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.menu-lateral nav a:hover { background: var(--color-surface-alt); }
+
+.menu-lateral nav a.activo {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ========================================
+   DROPDOWN (avatar/usuario)
+   ======================================== */
+
+.menu-usuario { position: relative; }
+
+.boton-avatar {
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.boton-avatar:hover { transform: translateY(-1px); }
+
+.avatar-icono { font-size: 1.2rem; }
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 240px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-large);
+  padding: 0.5rem 0;
+  animation: aparecer var(--transition-fast) ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown[hidden] { display: none; }
+
+.dropdown-cabecera {
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dropdown-cabecera strong {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+}
+
+.dropdown-cabecera small {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.dropdown-lista { list-style: none; }
+
+.dropdown-lista a,
+.dropdown-link-boton {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  min-height: var(--tamano-toque-min);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.dropdown-lista a:hover,
+.dropdown-link-boton:hover { background: var(--color-surface-alt); }
+
+.dropdown-lista .icono {
+  width: 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.dropdown-link-boton { color: var(--color-error-text); }
+
+.dropdown-lista .divisor {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0.3rem 0;
+}
+
+/* ========================================
+   CONTENIDO PRINCIPAL
+   (páginas interiores: Contact, Home, etc.)
+   ======================================== */
+
+#contenido,
+.contenido {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;          /* padding gestionado por cada página */
+}
+
+/* La landing ocupa todo el viewport: anular restricciones del wrapper */
+.contenido:has(> [class*="root"]) {
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* App shell */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ========================================
+   PIE DE PÁGINA
+   ======================================== */
+
+.pie {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.pie a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.pie a:hover { color: var(--color-accent-hover); }
+
+.pie-contenedor {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========================================
+   BREAKPOINTS — mobile-first
+   ======================================== */
+
+@media (min-width: 768px) {
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
+  .pie-contenedor { flex-direction: row; }
+}
+
+@media (min-width: 1024px) {
+  .cabecera-contenedor { padding: 0.8rem var(--layout-x); }
+  .nav-central { display: flex; }
+  .boton-hamburguesa { display: none; }
+
+  .pie-contenedor {
+    flex-direction: row;
+    max-width: var(--max-width);
+  }
+}
+
+/* ========================================
+   MENÚ MÓVIL ACTIVO
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .nav-central { display: none; }
+
+  .nav-central.activo {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--color-surface);
+    padding: 1rem 1.5rem;
+    gap: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    box-shadow: var(--shadow-medium);
+    z-index: 999;
+  }
+
+  .cabecera { position: relative; }
+}
+
+/* ========================================
+   ACCESIBILIDAD — reducir movimiento
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+.landing-scroll-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  border-radius: 50%;
+  width: var(--tamano-toque-min);
+  height: var(--tamano-toque-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default);}
+-----------------------
+===== ./src/styles/Home.module.css =====
+/* ═══════════════════════════════════════════════
+   Home.module.css
+   Usa las variables de src/styles/variables.css
+   ═══════════════════════════════════════════════ */
+
+.page {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-x);
+}
+
+/* ══════════════════════════════
+   HERO
+   ══════════════════════════════ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+  min-height: 70vh;
+  position: relative;
+}
+
+.heroInner { max-width: 680px; }
+
+.eyebrow {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.2rem;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle em {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+.heroBio {
+  font-family: var(--font-base);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  margin-bottom: 2.4rem;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Decoración lateral */
+.heroAccent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.18;
+  user-select: none;
+}
+
+.accentLine {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--color-accent), var(--color-tech));
+}
+
+.accentText {
+  font-family: var(--font-base);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  writing-mode: vertical-rl;
+}
+
+/* ══════════════════════════════
+   BOTONES
+   ══════════════════════════════ */
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  transition: transform var(--transition-default),
+              box-shadow var(--transition-default),
+              opacity var(--transition-default);
+}
+
+.btnPrimary svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  transition: transform var(--transition-default);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-green);
+  opacity: 0.9;
+  text-decoration: none;
+  color: var(--color-bg);
+}
+
+.btnPrimary:hover svg { transform: translate(3px, -3px); }
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-dark);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: transparent;
+  transition: border-color var(--transition-default),
+              color var(--transition-default),
+              background var(--transition-default);
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════
+   SECCIONES
+   ══════════════════════════════ */
+
+.section {
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.sectionAlt {
+  background: var(--color-surface);
+  margin: 0 calc(-1 * var(--layout-x));
+  padding: var(--spacing-lg) var(--layout-x);
+  border-top: none;
+}
+
+.sectionHeader {
+  margin-bottom: var(--spacing-md);
+}
+
+.sectionLabel {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+/* ══════════════════════════════
+   TIMELINE
+   ══════════════════════════════ */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* línea vertical continua */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent),
+    var(--color-tech)
+  );
+  opacity: 0.3;
+}
+
+.timelineItem {
+  position: relative;
+  padding: 1.6rem 0 1.6rem 1.8rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-default);
+  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+}
+
+.timelineItem:last-child { border-bottom: none; }
+
+.timelineItem:hover { background: var(--color-surface); }
+
+/* Dot lateral */
+.tlDot {
+  position: absolute;
+  left: -2.45rem;
+  top: 1.9rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-dark);
+  background: var(--color-bg);
+  transition: border-color var(--transition-default),
+              background var(--transition-default);
+}
+
+.tlgreen .tlDot {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+.tlblue .tlDot {
+  border-color: var(--color-tech);
+  background: var(--color-tech-subtle);
+}
+
+.tlneutral .tlDot {
+  border-color: var(--color-border-dark);
+}
+
+.tlBody { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.tlPeriod {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.tlRole {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+.tlOrg {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.tlblue .tlOrg { color: var(--color-tech); }
+.tlneutral .tlOrg { color: var(--color-text-muted); }
+
+.tlDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 680px;
+  margin-top: 0.4rem;
+}
+
+/* ══════════════════════════════
+   SOFT SKILLS
+   ══════════════════════════════ */
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.skillCard {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: 1.6rem;
+  cursor: default;
+  transition: border-color var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.skillCard:hover,
+.skillActive {
+  border-color: var(--color-border-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+}
+
+.skillIcon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.skillTitle {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.skillDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* ══════════════════════════════
+   TECH STACK
+   ══════════════════════════════ */
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.techTag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.techTag:hover {
+  transform: translateY(-2px);
+}
+
+.techGreen {
+  border-color: rgba(109, 191, 130, 0.28);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+.techBlue {
+  border-color: rgba(91, 141, 184, 0.28);
+  color: var(--color-tech);
+  background: var(--color-tech-subtle);
+}
+
+/* ══════════════════════════════
+   PROYECTOS
+   ══════════════════════════════ */
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  padding: 1.6rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-default),
+              transform var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.projectCard:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  text-decoration: none;
+}
+
+.projectHighlight {
+  border-color: rgba(109, 191, 130, 0.22);
+  background: linear-gradient(
+    135deg,
+    rgba(109, 191, 130, 0.05) 0%,
+    rgba(91, 141, 184, 0.04) 100%
+  );
+}
+
+.projectBadge {
+  display: inline-block;
+  font-family: var(--font-base);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start),
+    var(--color-gradient-end)
+  );
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-pill);
+  align-self: flex-start;
+}
+
+.projectName {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.projectDesc {
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.projectStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.projectTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-muted);
+}
+
+.projectLink {
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+  margin-top: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.projectCard:hover .projectLink { color: var(--color-accent-hover); }
+
+/* ══════════════════════════════
+   CTA FINAL
+   ══════════════════════════════ */
+
+.ctaSection {
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+}
+
+.ctaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.ctaText {
+  font-family: var(--font-base);
+  font-size: var(--font-size-md);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  max-width: 480px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+
+@media (max-width: 900px) {
+  .skillsGrid    { grid-template-columns: repeat(2, 1fr); }
+  .projectsGrid  { grid-template-columns: repeat(2, 1fr); }
+  .heroAccent    { display: none; }
+  .hero          { grid-template-columns: 1fr; min-height: auto; }
+}
+
+@media (max-width: 600px) {
+  .page          { padding: 0 1.4rem; }
+  .skillsGrid    { grid-template-columns: 1fr; }
+  .projectsGrid  { grid-template-columns: 1fr; }
+  .timeline      { padding-left: 1.4rem; }
+  .sectionAlt    {
+    margin: 0 -1.4rem;
+    padding: var(--spacing-md) 1.4rem;
+  }
+  .heroCtas      { flex-direction: column; }
+  .btnPrimary,
+  .btnSecondary  { justify-content: center; }
+}
+
+-----------------------
+===== ./src/styles/LandingPage.module.css =====
+/* ═══════════════════════════════════════════════
+   LandingPage.module.css
+   Landing fullscreen — Header incluido dentro
+   ═══════════════════════════════════════════════ */
+
+/* ── Raíz: fullscreen real ── */
+.root {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header flotante sobre slides ── */
+.headerWrap {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  /* El header tiene su propio fondo blur; aquí lo volvemos transparente */
+  background: transparent;
+}
+
+/* Sobreescribir el fondo del header cuando está en la landing */
+.headerWrap :global(.cabecera) {
+  background: rgba(10, 16, 13, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: static;   /* deja de ser sticky aquí; el root es fixed */
+}
+
+/* ── Slides ── */
+.slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  will-change: opacity;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      108deg,
+      rgba(10, 16, 13, 0.88) 0%,
+      rgba(10, 16, 13, 0.55) 42%,
+      rgba(10, 16, 13, 0.12) 100%
+    );
+}
+
+.active { opacity: 1; }
+
+/* ── Grain ── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* ── Contenido: ocupa el espacio restante debajo del header ── */
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;                    /* crece para llenar el espacio bajo el header */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* centrado vertical en ese espacio */
+
+  padding: 0 var(--layout-x) 5rem;
+  max-width: min(860px, 100%);
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--font-base);
+  font-size: clamp(0.62rem, 1vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.3s forwards;
+}
+
+/* Headline */
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+
+.pivot {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+/* Phrase rotator */
+.rotatorWrap {
+  margin-top: 1.2rem;
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 1s 0.72s forwards;
+}
+
+.phrase {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.1vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  margin: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.phraseIn  { opacity: 1; transform: translateY(0); }
+.phraseOut { opacity: 0; transform: translateY(-8px); }
+
+/* Bio */
+.bio {
+  font-family: var(--font-base);
+  font-size: clamp(0.88rem, 1.25vw, 1rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+  margin-top: 1.6rem;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 1s 0.95s forwards;
+}
+
+.bio strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Badges */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.1s forwards;
+}
+
+.badge {
+  font-family: var(--font-base);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.78rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.badgeGreen {
+  border-color: rgba(109, 191, 130, 0.32);
+  color: var(--color-accent);
+}
+
+.badgeBlue {
+  border-color: rgba(91, 141, 184, 0.32);
+  color: var(--color-tech);
+}
+
+/* CTA */
+.cta {
+  margin-top: 2.2rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.25s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.88rem 2.1rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--color-bg);
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start) 0%,
+    var(--color-gradient-end) 100%
+  );
+  transition:
+    transform var(--transition-default),
+    box-shadow var(--transition-default),
+    opacity var(--transition-default);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-green);
+  opacity: 0.9;
+  color: var(--color-bg);
+  text-decoration: none;
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transition-default);
+}
+
+.btn:hover svg { transform: translateX(4px); }
+
+/* ── Dots ── */
+.dots {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(238, 242, 238, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background var(--transition-default),
+    height var(--transition-default),
+    border-radius var(--transition-default);
+}
+
+.dotActive {
+  background: var(--color-accent);
+  height: 20px;
+  border-radius: 3px;
+}
+
+/* ── Scroll hint ── */
+.scrollHint {
+  position: absolute;
+  bottom: 1.8rem;
+  left: var(--layout-x);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  opacity: 0;
+  animation: fadeIn 1s 2s forwards;
+}
+
+.scrollLine {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-accent), transparent);
+  animation: pulse 2.2s infinite;
+}
+
+.scrollHint span {
+  font-family: var(--font-base);
+  font-size: 0.63rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .content   { max-width: 100%; }
+  .dots      { right: 0.8rem; }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .content {
+    justify-content: flex-end;
+    padding: 0 1.4rem 4.5rem;
+    max-width: 100%;
+  }
+
+  .headline     { font-size: clamp(1.85rem, 8.5vw, 2.5rem); }
+  .phrase       { font-size: clamp(0.88rem, 3.8vw, 1.1rem); }
+  .bio          { max-width: 100%; font-size: 0.86rem; margin-top: 1rem; }
+  .badges       { gap: 0.35rem; margin-top: 0.9rem; }
+  .badge        { font-size: 0.6rem; padding: 0.22rem 0.6rem; }
+  .cta          { margin-top: 1.4rem; }
+  .btn          { padding: 0.78rem 1.7rem; font-size: 0.86rem; }
+  .dots, .scrollHint { display: none; }
+}
+
+/* Reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .slide, .phrase, .btn, .dot { transition: none !important; }
+
+  .eyebrow, .headline, .rotatorWrap,
+  .bio, .badges, .cta, .scrollHint {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+-----------------------
+===== ./src/styles/variables.css =====
+/* =====================================================
+   PORTFOLIO — SISTEMA DE DISEÑO UNIFICADO
+   Nutrición & Tecnología · Variables globales
+   ===================================================== */
+
+:root {
+
+  /* ========================================
+     PALETA — Fondo y superficies (dark mode)
+     ======================================== */
+
+  --color-bg:           #0d1210;   /* negro con matiz verde muy sutil */
+  --color-bg-secondary: #131a16;   /* un paso más claro */
+  --color-surface:      #1a2420;   /* tarjetas / paneles */
+  --color-surface-alt:  #1f2d28;   /* superficies alternativas, hover suave */
+
+  /* ========================================
+     PALETA — Bordes
+     ======================================== */
+
+  --color-border:       rgba(255, 255, 255, 0.07);
+  --color-border-hover: rgba(150, 210, 170, 0.20);  /* verde suave al hover */
+  --color-border-dark:  rgba(255, 255, 255, 0.14);
+
+  /* ========================================
+     PALETA — Texto
+     ======================================== */
+
+  --color-text:           #eef2ee;  /* blanco con matiz cálido verdoso */
+  --color-text-secondary: #a8b8ae;  /* gris con undertone verde */
+  --color-text-muted:     #6b7d74;  /* texto desactivado */
+
+  /* ========================================
+     PALETA — Acento NUTRICIÓN (verde natural)
+     Uso: secciones de bio, about, nutrición
+     ======================================== */
+
+  --color-accent:          #6dbf82;  /* verde salud, vivo pero no neón */
+  --color-accent-hover:    #85d098;
+  --color-accent-subtle:   rgba(109, 191, 130, 0.12);
+
+  /* ========================================
+     PALETA — Acento TECH (azul pizarra)
+     Uso: proyectos ASIR, Full Stack, código
+     ======================================== */
+
+  --color-tech:            #5b8db8;  /* azul pizarra profesional */
+  --color-tech-hover:      #74a5d0;
+  --color-tech-subtle:     rgba(91, 141, 184, 0.12);
+
+  /* ========================================
+     PALETA — Acento PUENTE (verde-azul)
+     Uso: gradientes, CTAs, highlights
+     ======================================== */
+
+  --color-gradient-start:  #6dbf82;  /* verde nutrición */
+  --color-gradient-end:    #5b8db8;  /* azul tech */
+
+  /* ========================================
+     ESTADOS
+     ======================================== */
+
+  --color-success-bg:   rgba(109, 191, 130, 0.12);
+  --color-success-text: #86efac;
+
+  --color-error-bg:     rgba(239, 68, 68, 0.12);
+  --color-error-text:   #fca5a5;
+
+  --color-warning-bg:   rgba(251, 191, 36, 0.10);
+  --color-warning-text: #fde68a;
+
+  /* ========================================
+     TIPOGRAFÍA
+     Playfair Display → calidez / nutrición
+     DM Mono / DM Sans → claridad / tech
+     ======================================== */
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-base:    "DM Sans", system-ui, sans-serif;
+  --font-mono:    "DM Mono", "Fira Code", monospace;
+
+  /* Alias en español (compatibilidad con global.css) */
+  --fuente-titulo: var(--font-heading);
+  --fuente-base:   var(--font-base);
+
+  /* ========================================
+     ESCALA TIPOGRÁFICA
+     ======================================== */
+
+  --font-size-xs:   0.75rem;   /* 12px */
+  --font-size-sm:   0.875rem;  /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md:   1.125rem;  /* 18px */
+  --font-size-lg:   1.25rem;   /* 20px */
+  --font-size-xl:   1.5rem;    /* 24px */
+  --font-size-2xl:  2rem;      /* 32px */
+  --font-size-3xl:  3rem;      /* 48px */
+
+  /* Alias legacy */
+  --tamano-base: var(--font-size-base);
+
+  /* ========================================
+     RADIOS DE BORDE
+     ======================================== */
+
+  --radius-small:  6px;
+  --radius-medium: 14px;
+  --radius-large:  22px;
+  --radius-pill:   999px;
+
+  /* Alias en español */
+  --radio-pequeno: var(--radius-small);
+  --radio-medio:   var(--radius-medium);
+  --radio-grande:  var(--radius-large);
+
+  /* ========================================
+     SOMBRAS
+     ======================================== */
+
+  --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.20);
+  --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.28);
+  --shadow-large:  0 20px 60px rgba(0, 0, 0, 0.40);
+  --shadow-glow-green: 0 0 24px rgba(109, 191, 130, 0.18);
+  --shadow-glow-blue:  0 0 24px rgba(91, 141, 184, 0.18);
+
+  /* Alias en español */
+  --sombra-suave:  var(--shadow-soft);
+  --sombra-media:  var(--shadow-medium);
+  --sombra-fuerte: var(--shadow-large);
+
+  /* ========================================
+     LAYOUT
+     ======================================== */
+
+  --max-width: 1200px;
+  --layout-x: clamp(24px, 6vw, 96px);
+
+  /* Alias en español */
+  --max-ancho: var(--max-width);
+
+  --spacing-xs:  0.5rem;
+  --spacing-sm:  1rem;
+  --spacing-md:  2rem;
+  --spacing-lg:  4rem;
+  --spacing-xl:  8rem;
+
+  --tamano-toque-min: 44px;   /* mínimo accesible para botones táctiles */
+
+  /* ========================================
+     TRANSICIONES
+     ======================================== */
+
+  --transition-fast:    0.18s ease;
+  --transition-default: 0.28s ease;
+  --transition-slow:    0.45s ease;
+}
+
+-----------------------
+===== ./tsconfig.app.json =====
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+-----------------------
+===== ./tsconfig.json =====
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+-----------------------
+===== ./tsconfig.node.json =====
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "module": "esnext",
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+-----------------------
+===== ./vite.config.ts =====
+import { defineConfig } from 'vite'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    babel({ presets: [reactCompilerPreset()] })
+  ],
+})
+
+-----------------------
