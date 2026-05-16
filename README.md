@@ -1,132 +1,148 @@
-# Asier Medina Portfolio
+# Asier González Medina — Portfolio Personal
 
-Modern personal portfolio and CV website built with React.
+Portfolio profesional de Asier González Medina, nutricionista en transición al sector tecnológico. Desarrollado con React + TypeScript + Vite y desplegado en Cloudflare Pages.
 
-## 📌 Overview
+## 🌐 Demo
 
-This project is a personal developer portfolio created to showcase:
-
-* Projects
-* Technical skills
-* Experience
-* Contact information
-* Professional profile
-
-The objective is to build a clean and modern frontend application focused on presentation, usability and responsive design.
+[asiermedina.dev](https://asiermedina.dev) *(actualizar con el dominio real)*
 
 ---
 
-## 🚀 Technologies
+## 🛠️ Stack tecnológico
 
-Current stack:
-
-* React
-* Vite
-* JavaScript / TypeScript
-* HTML5
-* CSS3
-* Git & GitHub
-
-Future improvements may include:
-
-* React Router
-* TailwindCSS
-* Framer Motion
-* Dark mode
-* Internationalization (i18n)
-* PDF CV download
-* Deploy with custom domain
+| Capa | Tecnología |
+|------|-----------|
+| Framework | React 19 + TypeScript |
+| Build tool | Vite |
+| Routing | React Router DOM v6 |
+| Estilos | CSS Modules + CSS Variables globales |
+| Email | EmailJS (`@emailjs/browser`) |
+| Tipografía | Playfair Display + DM Sans + DM Mono (Google Fonts) |
+| Despliegue | Cloudflare Pages |
 
 ---
 
-## 📂 Project Structure
+## 📁 Estructura del proyecto
 
-```bash
+```
 src/
- ├── assets/
- ├── components/
- ├── pages/
- ├── styles/
- ├── App.jsx
- └── main.jsx
+├── assets/              # Logo y recursos estáticos
+├── components/
+│   ├── Header.tsx       # Navegación sticky con menú móvil
+│   ├── Footer.tsx       # Pie de página
+│   ├── ContactForm.tsx  # Formulario de contacto
+│   ├── ScrollToTop.tsx  # Reset de scroll en cambio de ruta
+│   └── ScrollToTopButton.tsx  # Botón flotante volver arriba
+├── hooks/
+│   └── useContactForm.ts  # Lógica del formulario + EmailJS
+├── models/
+│   └── ContactModel.ts    # Interfaces TypeScript
+├── pages/
+│   ├── LandingPage.tsx    # Hero fullscreen con slideshow
+│   ├── Home.tsx           # Sobre mí, timeline, soft skills
+│   ├── Projects.tsx       # Stack técnico y proyectos
+│   └── ContactPage.tsx    # Formulario + info + descarga CV
+└── styles/
+    ├── variables.css        # Sistema de tokens de diseño
+    ├── global.css           # Reset y estilos globales
+    ├── LandingPage.module.css
+    ├── Home.module.css
+    ├── Projects.module.css
+    └── ContactPage.css
+public/
+└── cv/
+    ├── cv-asier-medina.pdf          # CV estándar español
+    └── cv-europeo-asier-medina.pdf  # CV inglés / Europass
 ```
 
 ---
 
-## 🛠️ Installation
-
-Clone the repository:
+## 🚀 Instalación y desarrollo local
 
 ```bash
-git clone https://github.com/your-user/asiermedina-portfolio.git
-```
-
-Enter the project folder:
-
-```bash
+# Clonar el repositorio
+git clone https://github.com/asier-Medina/asiermedina-portfolio.git
 cd asiermedina-portfolio
-```
 
-Install dependencies:
-
-```bash
+# Instalar dependencias
 npm install
+
+# Arrancar en desarrollo
+npm run dev
+
+# Build de producción
+npm run build
+
+# Preview del build
+npm run preview
 ```
 
-Start development server:
+---
+
+## 📧 Configuración EmailJS
+
+El formulario de contacto usa [EmailJS](https://emailjs.com) (plan gratuito, 200 envíos/mes).
+
+Las credenciales están definidas en `src/hooks/useContactForm.ts`:
+
+```ts
+const EMAILJS_SERVICE_ID  = "";
+const EMAILJS_TEMPLATE_ID = "";
+const EMAILJS_PUBLIC_KEY  = "";
+```
+
+> ⚠️ La Public Key de EmailJS es segura para exponerse en el cliente (es de solo lectura). El Service ID y Template ID son identificadores, no secretos. Ver sección de seguridad más abajo.
+
+---
+
+## ☁️ Despliegue en Cloudflare Pages
 
 ```bash
-npm run dev
+# Build
+npm run build
+
+# El directorio de salida es: dist/
+```
+
+**Configuración en Cloudflare Pages:**
+
+| Campo | Valor |
+|-------|-------|
+| Framework preset | Vite |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js version | 18+ |
+
+**Archivo `public/_redirects`** (necesario para React Router en Cloudflare):
+
+```
+/* /index.html 200
 ```
 
 ---
 
-## 🎯 Project Goals
+## 📄 Páginas
 
-* Create a professional online presence
-* Improve React and frontend skills
-* Showcase personal and academic projects
-* Build a portfolio ready for job applications
-* Deploy the project under a personal domain
-
----
-
-## 📱 Features Planned
-
-* Responsive layout
-* Projects section
-* Skills section
-* About me page
-* Download CV button
-* Contact section
-* Animations and transitions
-* Theme switcher
+| Ruta | Página | Descripción |
+|------|--------|-------------|
+| `/` | Landing | Hero fullscreen con slideshow y frases rotantes |
+| `/home` | Sobre mí | Timeline, soft skills |
+| `/projects` | Proyectos | Stack técnico y proyectos de GitHub |
+| `/contact` | Contacto | Formulario EmailJS + descarga de CV |
 
 ---
 
-## 🌐 Deployment
+## ♿ Accesibilidad
 
-Deployment will be configured in future versions.
-
-Possible platforms:
-
-* Vercel
-* Netlify
-* Cloudflare Pages
-
-Custom domain support planned.
+- Labels asociados a inputs con `htmlFor` / `id`
+- `aria-label` en botones icónicos
+- `aria-live` en zonas de contenido dinámico
+- `role="alert"` en mensajes de error
+- `prefers-reduced-motion` respetado en animaciones
+- `tabIndex` condicional en el botón de scroll
 
 ---
 
-## 📄 License
+## 📝 Licencia
 
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-Asier Medina
-Full Stack Student
-Bilbao, Basque Country
-
+Proyecto personal. Código disponible como referencia, no para uso comercial.
