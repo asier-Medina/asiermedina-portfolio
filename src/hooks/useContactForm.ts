@@ -9,9 +9,9 @@ import type {
 
 // ── Credenciales EmailJS ──────────────────────────────
 // useContactForm.ts
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID  = "service_v27c9nb";
+const EMAILJS_TEMPLATE_ID = "template_7v9k2lj";
+const EMAILJS_PUBLIC_KEY  = "user_9v8m4pn";
 // ─────────────────────────────────────────────────────
 
 export function useContactForm() {
