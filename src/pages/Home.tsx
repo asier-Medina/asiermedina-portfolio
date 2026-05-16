@@ -26,14 +26,14 @@ const TIMELINE = [
     role: "Gestión comercial",
     org: "Pepe Navarro S.L. · España",
     color: "green",
-    desc: "5 años gestionando secciones de tienda: pedidos, proveedores, inventario, facturas. Aprendí que la logística y los datos importan en cualquier sector.",
+    desc: "6 años gestionando secciones de tienda: pedidos, proveedores, inventario, facturas. Aprendí que la logística y los datos importan en cualquier sector.",
   },
     {
     period: "2025 – actualidad",
     role: "Estudiante de Administración de sistemas informáticos en red",
     org: "BirtLH · Bilbao",
     color: "blue",
-    desc: "Experiencia en el diseño y administración de infraestructuras TI, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
+    desc: "Experiencia en el diseño y administración de infraestructuras, gestión de redes y seguridad informática. Complementa mi formación en desarrollo web con una base sólida en sistemas y redes.",
   },
   {
     period: "2026 – actualidad",

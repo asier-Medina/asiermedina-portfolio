@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import {
+  NavLink,
+  Link,
+  useLocation,
+} from "react-router-dom";
 
 import logo from "../assets/logo.png";
 
@@ -44,25 +48,43 @@ function Header() {
             id="main-navigation"
             className={`nav-central ${open ? "activo" : ""}`}
           >
-            <Link
+
+            <NavLink
               to="/home"
               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link activo"
+                  : "nav-link"
+              }
             >
               Conóceme
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/projects"
               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link activo"
+                  : "nav-link"
+              }
             >
               Proyectos
-            </Link>
+            </NavLink>
 
-            <Link
+            <NavLink
               to="/contact"
               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link activo"
+                  : "nav-link"
+              }
             >
               Contacto
-            </Link>
+            </NavLink>
+
           </nav>
 
           <button
@@ -72,7 +94,20 @@ function Header() {
             aria-expanded={open}
             aria-controls="main-navigation"
           >
-            ☰
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 6H20M4 12H20M4 18H20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
           </button>
 
         </div>

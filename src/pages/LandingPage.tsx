@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef, useCallback} from 'react'
 import { Link } from "react-router-dom"
-import Header from "../components/Header"
 import styles from "../styles/LandingPage.module.css"
 
 const SLIDES = [
   'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1800&q=80',
+  'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1800&q=80',
   'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=1800&q=80',
   'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1800&q=80',
-]
+  'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1800&q=80',
+] 
 
 const PHRASES = [
   'El diagnóstico es el mismo: Entender cómo.',
@@ -66,10 +67,7 @@ export default function LandingPage() {
   return (
     <div className={styles.root}>
 
-      {/* Header flotante sobre los slides */}
-      <div className={styles.headerWrap}>
-        <Header />
-      </div>
+
 
       {/* Slides */}
       <div className={styles.slides} aria-hidden="true">

@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import ContactPage from "./pages/ContactPage";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
+import NotFound from "./pages/NotFound";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -29,7 +30,7 @@ function App() {
           <Route path="/home"     element={<Home />} />
           <Route path="/contact"  element={<ContactPage />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="*"         element={<h1>Página no encontrada</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

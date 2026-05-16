@@ -4,15 +4,6 @@ export interface ContactFormData {
   reason: string;
   message: string;
 }
-
-export interface TeamMember {
-  id: number;
-  name: string;
-  role?: string;
-  description?: string;
-  githubUrl?: string;
-}
-
 export type FormErrors = {
   name?: string;
   email?: string;
@@ -20,8 +11,3 @@ export type FormErrors = {
   message?: string;
 };
 
-// Para el historial de mensajes
-export interface StoredMessage extends ContactFormData {
-  id: string; 
-  date: string;
-}
