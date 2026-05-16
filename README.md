@@ -86,9 +86,9 @@ El formulario de contacto usa [EmailJS](https://emailjs.com) (plan gratuito, 200
 Las credenciales están definidas en `src/hooks/useContactForm.ts`:
 
 ```ts
-const EMAILJS_SERVICE_ID  = "service_v27c9nb";
-const EMAILJS_TEMPLATE_ID = "template_f5klbce";
-const EMAILJS_PUBLIC_KEY  = "n6CtsP6MMc4qEPlA6";
+const EMAILJS_SERVICE_ID  = "";
+const EMAILJS_TEMPLATE_ID = "";
+const EMAILJS_PUBLIC_KEY  = "";
 ```
 
 > ⚠️ La Public Key de EmailJS es segura para exponerse en el cliente (es de solo lectura). El Service ID y Template ID son identificadores, no secretos. Ver sección de seguridad más abajo.
