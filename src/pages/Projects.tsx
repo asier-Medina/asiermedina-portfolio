@@ -42,17 +42,16 @@ const PROJECTS = [
 
 /* ── Tech stack ── */
 const TECH = [
-  { label: "React", color: "blue" },
+  { label: "React", color: "green" },
   { label: "Node.js", color: "green" },
-  { label: "Express", color: "blue" },
+  { label: "Express", color: "green" },
   { label: "PostgreSQL", color: "blue" },
-  { label: "MongoDB", color: "green" },
+  { label: "MongoDB", color: "blue" },
   { label: "Docker", color: "blue" },
   { label: "Git / GitHub", color: "green" },
   { label: "JWT", color: "blue" },
   { label: "REST APIs", color: "blue" },
   { label: "TypeScript", color: "blue" },
-  { label: "ASIR", color: "green" },
   { label: "Redes", color: "green" },
 ]
 

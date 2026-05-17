@@ -147,7 +147,7 @@
   font-size: clamp(0.88rem, 1.25vw, 1rem);
   font-weight: 300;
   line-height: 1.85;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   margin-top: 1.6rem;
   max-width: 480px;
   opacity: 0;

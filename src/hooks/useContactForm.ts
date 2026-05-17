@@ -57,7 +57,7 @@ export function useContactForm() {
     setSendError(null);
   };
 
-  // ── Submit — ahora con EmailJS ────────────────────
+  // ── Submit con EmailJS ────────────────────
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
 

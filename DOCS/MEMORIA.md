@@ -93,7 +93,6 @@ Se requiere el archivo `public/_redirects` con la regla `/* /index.html 200` par
 
 ## 7. Aprendizajes del proyecto
 
-- Gestión de **stacking contexts** en CSS (`isolation: isolate`) para resolver conflictos de z-index entre menús y overlays
 - Uso de **`useCallback`** para estabilizar referencias a funciones en efectos con timers
 - Limpieza de **`setTimeout` anidados** dentro de `setInterval` para evitar actualizaciones de estado en componentes desmontados
 - Diseño **mobile-first** con `clamp()` para tipografía fluida
