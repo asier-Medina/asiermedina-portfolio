@@ -1,4 +1,5 @@
 import { useState } from "react"
+import type React from "react"
 import { Link } from "react-router-dom"
 import styles from "../styles/Home.module.css"
 
@@ -44,17 +45,29 @@ const TIMELINE = [
   },
 ]
 
+const BJJ_ICON = (
+  <svg viewBox="0 0 32 32" width="1.8rem" height="1.8rem" aria-hidden="true">
+    {/* Panel izquierdo del gi */}
+    <path d="M2 2 L16 14 L16 30 L2 30 Z" fill="#dde4dd" />
+    {/* Panel derecho del gi */}
+    <path d="M30 2 L16 14 L16 30 L30 30 Z" fill="#c8d4c8" />
+    {/* Solapa izquierda */}
+    <path d="M2 2 L16 14" stroke="#aabcaa" strokeWidth="1" fill="none" />
+    {/* Solapa derecha */}
+    <path d="M30 2 L16 14" stroke="#aabcaa" strokeWidth="1" fill="none" />
+    {/* Cinturón azul */}
+    <rect x="2" y="19" width="28" height="5" rx="2.5" fill="#3b82f6" />
+    {/* Nudo del cinturón */}
+    <rect x="13" y="18" width="6" height="7" rx="1.5" fill="#2563eb" />
+  </svg>
+)
+
 /* ── Soft skills ── */
-const SKILLS = [
+const SKILLS: { icon: React.ReactNode; title: string; desc: string }[] = [
   {
     icon: "🧩",
     title: "Adaptabilidad extrema",
     desc: "De una consulta clínica a un campo en México, de ahí a una tienda, y ahora al código. Cada entorno ha sido un idioma nuevo que aprendí desde cero.",
-  },
-  {
-    icon: "🔍",
-    title: "Diagnóstico y análisis",
-    desc: "Años escuchando los problemas de pacientes y clientes, buscando la raíz  no el síntoma. Lo mismo pasa con un bug o un requisito mal definido.",
   },
   {
     icon: "🤝",
@@ -75,6 +88,11 @@ const SKILLS = [
     icon: "📦",
     title: "Gestión bajo presión",
     desc: "Inventario roto un viernes por la tarde, Dietas para nuevos ingresos, taller sin materiales... La presión no me paraliza, me organiza.",
+  },
+  {
+    icon: BJJ_ICON,
+    title: "Resiliencia activa",
+    desc: "Practico jiu-jitsu brasileño. Un deporte donde te someten constantemente y la única salida es volver. El fracaso es el método, no la excepción. Aprender a levantarse es la clave.",
   },
 ]
 

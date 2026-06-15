@@ -13,7 +13,7 @@ const SLIDES = [
 const PHRASES = [
   'El diagnóstico es el mismo: Entender cómo.',
   'Cambié de idioma, no de manera de pensar.',
-  'Mismo método: Prueba y Error.',
+  'Mismo método: Descubrir la causa y buscar la solución.',
 ]
 
 export default function LandingPage() {
