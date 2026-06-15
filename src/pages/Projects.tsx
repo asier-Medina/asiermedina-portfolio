@@ -2,17 +2,43 @@ import { Link } from "react-router-dom"
 import styles from "../styles/Projects.module.css"
 
 /* ── Proyectos ── */
-const PROJECTS = [
+const PROJECTS: {
+  name: string
+  desc: string
+  stack: string[]
+  url: string
+  highlight: boolean
+  badge?: string
+  badgeVariant?: "hackathon" | "tripulaciones"
+}[] = [
   {
     name: "ONzero",
     desc: "App anti-desperdicio alimentario creada durante el Prompt-a-thon de BBK + The Bridge. Los usuarios introducen lo que tienen en casa y la app sugiere recetas.",
     stack: ["JavaScript", "React", "Node.js"],
     url: "https://github.com/asier-Medina/PROMPATON_OnZero",
     highlight: true,
+    badge: "Hackathon BBK",
+    badgeVariant: "hackathon",
+  },
+  {
+    name: "SustraiApp",
+    desc: "Desafío de Tripulaciones del bootcamp Full Stack de The Bridge: app para descubrir lugares, eventos y gastronomía del País Vasco. Proyecto transversal desarrollado junto a verticales de Data Science, Marketing Digital y Ciberseguridad.",
+    stack: ["React", "Node.js", "PostgreSQL", "Docker"],
+    url: "https://github.com/asier-Medina/SustraiApp",
+    highlight: true,
+    badge: "Tripulaciones · The Bridge",
+    badgeVariant: "tripulaciones",
+  },
+  {
+    name: "IsWorking",
+    desc: "Sistema de gestión de turnos de trabajo con autenticación segura y portales diferenciados para empleados y managers.",
+    stack: ["JavaScript", "Node.js", "Express"],
+    url: "https://github.com/asier-Medina/IsWorking",
+    highlight: false,
   },
   {
     name: "Tasuku-project",
-    desc: "Web app para gestionar y repartir tareas en espacios compartidos. incorpora un sistema de gamificación con puntos que incentiva completar las tareas antes y fomenta la colaboración entre los usuarios.",
+    desc: "Web app para gestionar y repartir tareas en espacios compartidos. Incorpora un sistema de gamificación con puntos que incentiva completar las tareas antes y fomenta la colaboración entre los usuarios.",
     stack: ["HTML", "JavaScript", "CSS"],
     url: "https://github.com/asier-Medina/tasuku-project",
     highlight: false,
@@ -29,6 +55,13 @@ const PROJECTS = [
     desc: "Aplicación web orientada a la exploración de destinos de viaje accesibles e informativos.",
     stack: ["HTML", "CSS", "React", "TypeScript"],
     url: "https://github.com/asier-Medina/BidaiaGo",
+    highlight: false,
+  },
+  {
+    name: "GESTION-STOCK",
+    desc: "Prototipo web para ayudar a comercios a gestionar materias primas, controlar inventario y prever ventas.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    url: "https://github.com/asier-Medina/GESTION-STOCK",
     highlight: false,
   },
   {
@@ -100,9 +133,15 @@ export default function Projects() {
                 p.highlight ? styles.projectHighlight : ""
               }`}
             >
-              {p.highlight && (
-                <span className={styles.projectBadge}>
-                  Hackathon
+              {p.highlight && p.badge && (
+                <span
+                  className={`${styles.projectBadge} ${
+                    p.badgeVariant === "tripulaciones"
+                      ? styles.projectBadgeTripulaciones
+                      : ""
+                  }`}
+                >
+                  {p.badge}
                 </span>
               )}
 
