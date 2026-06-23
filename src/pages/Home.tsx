@@ -114,7 +114,7 @@ export default function Home() {
           <p className={styles.heroBio}>
             Soy Asier. Nutricionista de formación, con experiencia en clínica, en
             cooperación internacional y gestión comercial. Desde 2025 estudio
-            Administración de redes en BirtLH y en 2026 inicié Desarrollo web full stack en The Bridge, Bilbao.
+            Administración de redes en BirtLH y en 2026 he completado el Bootcamp de Desarrollo web full stack con BBK y The Bridge.
           </p>
           <div className={styles.heroCtas}>
             <a
